@@ -4,61 +4,85 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Panel – LombokTrip</title>
+
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: { sans: ["Inter", "sans-serif"] },
             colors: {
-              brand: { 50:"#f0fdfa", 100:"#ccfbf1", 500:"#14b8a6", 600:"#0d9488", 700:"#0f766e" }
-            }
-          }
-        }
+              brand: {
+                50 : "#f0fdfa",
+                100: "#ccfbf1",
+                500: "#14b8a6",
+                600: "#0d9488",
+                700: "#0f766e",
+              },
+            },
+          },
+        },
       };
     </script>
   </head>
+
   <body class="bg-slate-100 font-sans text-slate-800 antialiased">
 
-    <!-- ── LOGIN OVERLAY ─────────────────────────────────────────────────── -->
+    <!-- ================================================================== -->
+    <!-- LOGIN OVERLAY                                                        -->
+    <!-- ================================================================== -->
     <div id="login-overlay" class="fixed inset-0 z-50 bg-slate-900 flex items-center justify-center p-4">
       <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-sm">
         <div class="text-center mb-6">
-          <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-700 to-teal-400 flex items-center justify-center text-white text-2xl mx-auto mb-3">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-700 to-teal-400
+                      flex items-center justify-center text-white text-2xl mx-auto mb-3">
             <i class="fa-solid fa-umbrella-beach"></i>
           </div>
           <h1 class="text-xl font-black text-slate-900">Admin LombokTrip</h1>
           <p class="text-xs text-slate-500 mt-1">Masukkan password untuk melanjutkan</p>
         </div>
+
         <form id="login-form" class="space-y-4">
-          <div class="relative">
-            <input
-              id="login-password"
-              type="password"
-              placeholder="Password admin..."
-              class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm"
-            />
-          </div>
+          <input
+            id="login-password"
+            type="password"
+            placeholder="Password admin..."
+            class="w-full px-4 py-3 rounded-xl border border-slate-200
+                   focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm"
+          />
           <p id="login-error" class="text-red-500 text-xs hidden">Password salah, coba lagi.</p>
-          <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-xl transition text-sm">
+          <button type="submit"
+            class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-xl transition text-sm">
             Masuk ke Admin Panel
           </button>
         </form>
-        <p class="text-center text-xs text-slate-400 mt-4">Password diatur di file <code class="bg-slate-100 px-1 rounded">.env</code></p>
+
+        <p class="text-center text-xs text-slate-400 mt-4">
+          Password diatur di file <code class="bg-slate-100 px-1 rounded">.env</code>
+        </p>
       </div>
     </div>
 
-    <!-- ── SIDEBAR + MAIN LAYOUT ─────────────────────────────────────────── -->
+
+    <!-- ================================================================== -->
+    <!-- ADMIN PANEL: SIDEBAR + KONTEN                                        -->
+    <!-- ================================================================== -->
     <div id="admin-panel" class="hidden min-h-screen flex">
 
-      <!-- Sidebar -->
+      <!-- ── Sidebar ──────────────────────────────────────────────────────── -->
       <aside class="w-60 bg-slate-900 text-white flex flex-col shrink-0 fixed h-full z-40">
+
         <!-- Logo -->
         <div class="px-6 py-5 border-b border-slate-800">
           <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-600 to-teal-400 flex items-center justify-center text-white text-sm">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-600 to-teal-400
+                        flex items-center justify-center text-white text-sm">
               <i class="fa-solid fa-umbrella-beach"></i>
             </div>
             <div>
@@ -68,39 +92,151 @@
           </div>
         </div>
 
-        <!-- Nav -->
+        <!-- Navigasi Menu -->
         <nav class="flex-1 px-3 py-4 space-y-1">
-          <a href="#" data-section="dashboard" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition">
+          <a href="#" data-section="dashboard"
+            class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
+                   text-slate-300 hover:bg-slate-800 hover:text-white transition">
             <i class="fa-solid fa-chart-pie w-4 text-center"></i> Dashboard
           </a>
-          <a href="#" data-section="paket" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium bg-brand-600 text-white">
+          <a href="#" data-section="paket"
+            class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
+                   text-slate-300 hover:bg-slate-800 hover:text-white transition">
             <i class="fa-solid fa-suitcase-rolling w-4 text-center"></i> Paket Wisata
           </a>
-          <a href="#" data-section="hero" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition">
+          <a href="#" data-section="hero"
+            class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
+                   text-slate-300 hover:bg-slate-800 hover:text-white transition">
             <i class="fa-solid fa-images w-4 text-center"></i> Hero Slideshow
           </a>
-          <a href="#" data-section="testimoni" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition">
+          <a href="#" data-section="testimoni"
+            class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
+                   text-slate-300 hover:bg-slate-800 hover:text-white transition">
             <i class="fa-solid fa-comments w-4 text-center"></i> Testimoni
-            <span id="testi-badge" class="ml-auto bg-amber-500 text-slate-900 text-[10px] font-black px-1.5 py-0.5 rounded-full hidden">0</span>
+            <span id="testi-badge"
+              class="ml-auto bg-amber-500 text-slate-900 text-[10px] font-black px-1.5 py-0.5 rounded-full hidden">
+              0
+            </span>
           </a>
-          <a href="#" data-section="settings" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition">
+          <a href="#" data-section="settings"
+            class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
+                   text-slate-300 hover:bg-slate-800 hover:text-white transition">
             <i class="fa-solid fa-sliders w-4 text-center"></i> Pengaturan
           </a>
         </nav>
 
-        <!-- Logout -->
+        <!-- Logout & Link Website -->
         <div class="px-3 py-4 border-t border-slate-800">
-          <button id="logout-btn" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:bg-slate-800 hover:text-white transition">
+          <button id="logout-btn"
+            class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
+                   text-slate-400 hover:bg-slate-800 hover:text-white transition">
             <i class="fa-solid fa-right-from-bracket w-4 text-center"></i> Keluar
           </button>
-          <a href="/" class="mt-1 w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:bg-slate-800 hover:text-white transition">
+          <a href="/"
+            class="mt-1 w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
+                   text-slate-400 hover:bg-slate-800 hover:text-white transition">
             <i class="fa-solid fa-globe w-4 text-center"></i> Lihat Website
           </a>
         </div>
-      </aside>
 
-      <!-- Main Content -->
-      <main class="ml-60 flex-1 p-6 lg:p-8">
+      </aside><!-- /aside -->
+
+
+      <!-- ================================================================ -->
+      <!-- SECTION: DASHBOARD                                                 -->
+      <!-- ================================================================ -->
+      <main id="section-dashboard" class="ml-60 flex-1 p-6 lg:p-8" style="display:none">
+
+        <div class="mb-8">
+          <h1 class="text-2xl font-black text-slate-900">Dashboard</h1>
+          <p class="text-sm text-slate-500 mt-0.5">Ringkasan data website LombokTrip</p>
+        </div>
+
+        <!-- Stat Cards -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wide">Total Paket</p>
+            <p id="dash-total-paket" class="text-3xl font-black text-slate-900 mt-1">–</p>
+          </div>
+          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wide">Paket Aktif</p>
+            <p id="dash-paket-aktif" class="text-3xl font-black text-brand-600 mt-1">–</p>
+          </div>
+          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wide">Hero Slides</p>
+            <p id="dash-hero" class="text-3xl font-black text-slate-900 mt-1">–</p>
+          </div>
+          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wide">Testimoni Pending</p>
+            <p id="dash-pending" class="text-3xl font-black text-amber-500 mt-1">–</p>
+          </div>
+        </div>
+
+        <!-- Quick Links + Info -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+            <h2 class="text-sm font-black text-slate-700 uppercase tracking-wide mb-4">Aksi Cepat</h2>
+            <div class="space-y-2">
+              <button data-section="paket"
+                class="nav-shortcut w-full flex items-center gap-3 px-4 py-3 rounded-xl
+                       bg-slate-50 hover:bg-brand-50 border border-transparent hover:border-brand-200
+                       text-sm font-medium text-slate-700 transition text-left">
+                <i class="fa-solid fa-suitcase-rolling text-brand-600 w-4"></i> Kelola Paket Wisata
+              </button>
+              <button data-section="hero"
+                class="nav-shortcut w-full flex items-center gap-3 px-4 py-3 rounded-xl
+                       bg-slate-50 hover:bg-brand-50 border border-transparent hover:border-brand-200
+                       text-sm font-medium text-slate-700 transition text-left">
+                <i class="fa-solid fa-images text-brand-600 w-4"></i> Kelola Hero Slideshow
+              </button>
+              <button data-section="testimoni"
+                class="nav-shortcut w-full flex items-center gap-3 px-4 py-3 rounded-xl
+                       bg-slate-50 hover:bg-brand-50 border border-transparent hover:border-brand-200
+                       text-sm font-medium text-slate-700 transition text-left">
+                <i class="fa-solid fa-comments text-brand-600 w-4"></i> Review Testimoni
+              </button>
+              <button data-section="settings"
+                class="nav-shortcut w-full flex items-center gap-3 px-4 py-3 rounded-xl
+                       bg-slate-50 hover:bg-brand-50 border border-transparent hover:border-brand-200
+                       text-sm font-medium text-slate-700 transition text-left">
+                <i class="fa-solid fa-sliders text-brand-600 w-4"></i> Pengaturan Website
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+            <h2 class="text-sm font-black text-slate-700 uppercase tracking-wide mb-4">Info Website</h2>
+            <div class="space-y-3 text-sm text-slate-600">
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-circle-check text-emerald-500 w-4"></i>
+                <span>Database Turso terhubung</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-circle-check text-emerald-500 w-4"></i>
+                <span>Cloudinary aktif untuk upload gambar</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-circle-check text-emerald-500 w-4"></i>
+                <span>Chatbot Gemini AI aktif</span>
+              </div>
+              <div class="flex items-center gap-3 pt-3 border-t border-slate-100">
+                <i class="fa-solid fa-globe text-brand-500 w-4"></i>
+                <a href="/" target="_blank" class="text-brand-600 hover:underline font-medium">
+                  Lihat halaman utama →
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main><!-- /section-dashboard -->
+
+
+      <!-- ================================================================ -->
+      <!-- SECTION: PAKET WISATA                                              -->
+      <!-- ================================================================ -->
+      <main id="section-paket" class="ml-60 flex-1 p-6 lg:p-8" style="display:none">
 
         <!-- Header -->
         <div class="flex items-center justify-between mb-8">
@@ -108,15 +244,14 @@
             <h1 class="text-2xl font-black text-slate-900">Manajemen Paket Wisata</h1>
             <p class="text-sm text-slate-500 mt-0.5">Kelola semua paket wisata NTB yang tampil di website</p>
           </div>
-          <button
-            id="btn-tambah"
-            class="flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white px-4 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-brand-600/20 transition"
-          >
+          <button id="btn-tambah"
+            class="flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white
+                   px-4 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-brand-600/20 transition">
             <i class="fa-solid fa-plus"></i> Tambah Paket
           </button>
         </div>
 
-        <!-- Stats Cards -->
+        <!-- Stat Cards Paket -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8" id="stats-container">
           <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
             <p class="text-xs font-bold text-slate-400 uppercase tracking-wide">Total Paket</p>
@@ -138,18 +273,17 @@
 
         <!-- Filter & Search -->
         <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-4 mb-6 flex flex-wrap gap-3 items-center">
-          <input
-            id="filter-search"
-            type="text"
-            placeholder="Cari nama paket..."
-            class="flex-1 min-w-[180px] px-3 py-2 text-sm bg-slate-50 rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none"
-          />
-          <select id="filter-wilayah" class="px-3 py-2 text-sm bg-slate-50 rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none">
+          <input id="filter-search" type="text" placeholder="Cari nama paket..."
+            class="flex-1 min-w-[180px] px-3 py-2 text-sm bg-slate-50 rounded-xl
+                   border border-slate-200 focus:border-brand-500 focus:outline-none" />
+          <select id="filter-wilayah"
+            class="px-3 py-2 text-sm bg-slate-50 rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none">
             <option value="">Semua Wilayah</option>
             <option value="lombok">Lombok</option>
             <option value="sumbawa">Sumbawa & Bima</option>
           </select>
-          <select id="filter-kategori" class="px-3 py-2 text-sm bg-slate-50 rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none">
+          <select id="filter-kategori"
+            class="px-3 py-2 text-sm bg-slate-50 rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none">
             <option value="">Semua Kategori</option>
             <option value="pantai">Pantai</option>
             <option value="petualangan">Petualangan</option>
@@ -157,7 +291,7 @@
           </select>
         </div>
 
-        <!-- Table -->
+        <!-- Tabel Paket -->
         <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
@@ -184,10 +318,13 @@
           </div>
         </div>
 
-      </main>
+      </main><!-- /section-paket -->
 
-      <!-- ── SECTION HERO SLIDESHOW ──────────────────────────────────────── -->
-      <main id="section-hero" class="ml-60 flex-1 p-6 lg:p-8 hidden">
+
+      <!-- ================================================================ -->
+      <!-- SECTION: HERO SLIDESHOW                                            -->
+      <!-- ================================================================ -->
+      <main id="section-hero" class="ml-60 flex-1 p-6 lg:p-8" style="display:none">
 
         <!-- Header -->
         <div class="flex items-center justify-between mb-8">
@@ -196,50 +333,357 @@
             <p class="text-sm text-slate-500 mt-0.5">Kelola gambar yang tampil bergantian di halaman utama</p>
           </div>
           <button id="btn-tambah-hero"
-            class="flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white px-4 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-brand-600/20 transition">
+            class="flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white
+                   px-4 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-brand-600/20 transition">
             <i class="fa-solid fa-plus"></i> Tambah Gambar
           </button>
         </div>
 
-        <!-- Hero Grid -->
+        <!-- Grid Hero -->
         <div id="hero-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="col-span-full text-center py-12 text-slate-400">
             <i class="fa-solid fa-spinner fa-spin text-2xl mb-2 block"></i> Memuat...
           </div>
         </div>
 
-      </main>
-    </div>
+      </main><!-- /section-hero -->
 
-    <!-- ── MODAL HERO FORM ────────────────────────────────────────────────── -->
-    <div id="modal-hero" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm">
-      <div class="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden">
-        <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100">
-          <h2 id="modal-hero-title" class="text-lg font-black text-slate-900">Tambah Hero Image</h2>
-          <button id="modal-hero-close" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition">
+
+      <!-- ================================================================ -->
+      <!-- SECTION: TESTIMONI                                                 -->
+      <!-- ================================================================ -->
+      <main id="section-testimoni" class="ml-60 flex-1 p-6 lg:p-8 overflow-y-auto" style="display:none">
+
+        <!-- Header + Filter Tab -->
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <h1 class="text-2xl font-black text-slate-900">Manajemen Testimoni</h1>
+            <p class="text-sm text-slate-500 mt-0.5">Review dan approve testimoni dari wisatawan sebelum ditampilkan</p>
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <button data-testi-filter="pending"
+              class="testi-filter-btn active-testi px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500 text-white">
+              Pending
+            </button>
+            <button data-testi-filter="approved"
+              class="testi-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">
+              Approved
+            </button>
+            <button data-testi-filter="rejected"
+              class="testi-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">
+              Rejected
+            </button>
+            <button data-testi-filter="all"
+              class="testi-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">
+              Semua
+            </button>
+          </div>
+        </div>
+
+        <!-- List Testimoni (diisi JS) -->
+        <div id="testi-admin-list" class="space-y-4">
+          <div class="text-center py-12 text-slate-400">
+            <i class="fa-solid fa-spinner fa-spin text-2xl mb-2 block"></i> Memuat...
+          </div>
+        </div>
+
+      </main><!-- /section-testimoni -->
+
+
+      <!-- ================================================================ -->
+      <!-- SECTION: PENGATURAN WEBSITE                                        -->
+      <!-- ================================================================ -->
+      <main id="section-settings" class="ml-60 flex-1 p-6 lg:p-8 overflow-y-auto" style="display:none">
+
+        <div class="mb-8">
+          <h1 class="text-2xl font-black text-slate-900">Pengaturan Website</h1>
+          <p class="text-sm text-slate-500 mt-0.5">Ubah angka dan teks stats counter yang tampil di hero halaman utama</p>
+        </div>
+
+        <!-- Preview realtime stats counter -->
+        <div class="bg-slate-900 rounded-2xl p-6 mb-8">
+          <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Preview Stats Counter</p>
+          <div id="settings-preview" class="grid grid-cols-2 md:grid-cols-4 gap-4 text-white text-center">
+            <!-- diisi oleh admin-settings.js -->
+          </div>
+        </div>
+
+        <!-- Form edit stats -->
+        <form id="settings-form" class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 lg:p-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="settings-fields">
+            <!-- diisi oleh admin-settings.js -->
+          </div>
+          <div class="pt-6 mt-6 border-t border-slate-100 flex justify-end gap-3">
+            <button type="button" id="settings-reset-btn"
+              class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-sm font-bold hover:bg-slate-50 transition">
+              Reset ke Default
+            </button>
+            <button type="submit" id="settings-save-btn"
+              class="px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold
+                     transition flex items-center gap-2 shadow-lg shadow-brand-600/20">
+              <i class="fa-solid fa-floppy-disk"></i>
+              <span id="settings-save-text">Simpan Perubahan</span>
+            </button>
+          </div>
+        </form>
+
+      </main><!-- /section-settings -->
+
+    </div><!-- /admin-panel -->
+
+
+    <!-- ================================================================== -->
+    <!-- MODAL: FORM TAMBAH / EDIT PAKET                                      -->
+    <!-- ================================================================== -->
+    <div id="modal-form"
+      class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm">
+      <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
+
+        <!-- Header Modal -->
+        <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 sticky top-0 bg-white z-10">
+          <h2 id="modal-title" class="text-lg font-black text-slate-900">Tambah Paket Wisata</h2>
+          <button id="modal-close"
+            class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
+
+        <!-- Form Paket -->
+        <form id="paket-form" class="p-6 space-y-5" enctype="multipart/form-data">
+          <input type="hidden" id="form-id" />
+
+          <!-- Upload / URL Gambar -->
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Gambar Paket</label>
+            <div class="flex gap-4 items-start">
+              <div id="img-preview-wrap"
+                class="w-32 h-24 rounded-xl overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300
+                       shrink-0 flex items-center justify-center">
+                <img id="img-preview" src="" alt="" class="w-full h-full object-cover hidden" />
+                <i id="img-placeholder" class="fa-solid fa-image text-2xl text-slate-300"></i>
+              </div>
+              <div class="flex-1 space-y-2">
+                <label class="flex items-center gap-2 cursor-pointer bg-slate-50 hover:bg-slate-100
+                              border border-slate-200 rounded-xl px-3 py-2 text-sm transition">
+                  <i class="fa-solid fa-upload text-brand-600"></i>
+                  <span class="text-slate-600">Upload file (maks 5MB)</span>
+                  <input type="file" id="form-gambar-file" accept="image/*" class="hidden" />
+                </label>
+                <p class="text-xs text-slate-400 text-center">— atau —</p>
+                <input type="url" id="form-gambar-url" placeholder="https://... (URL gambar)"
+                  class="w-full px-3 py-2 text-sm bg-slate-50 rounded-xl border border-slate-200
+                         focus:border-brand-500 focus:outline-none" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Nama & Lokasi -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">
+                Nama Paket <span class="text-red-500">*</span>
+              </label>
+              <input type="text" id="form-nama" required placeholder="Contoh: Surga Bahari Gili T."
+                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">
+                Lokasi <span class="text-red-500">*</span>
+              </label>
+              <input type="text" id="form-lokasi" required placeholder="Contoh: Lombok Utara, NTB"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
+            </div>
+          </div>
+
+          <!-- Wilayah & Kategori -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Wilayah</label>
+              <select id="form-wilayah"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none">
+                <option value="lombok">Lombok</option>
+                <option value="sumbawa">Sumbawa & Bima</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Kategori</label>
+              <select id="form-kategori"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none">
+                <option value="pantai">Pantai & Bahari</option>
+                <option value="petualangan">Petualangan & Alam</option>
+                <option value="budaya">Budaya & Tradisi</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Harga & Harga Coret -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">
+                Harga Promo (Rp) <span class="text-red-500">*</span>
+              </label>
+              <input type="number" id="form-harga" required min="0" placeholder="1850000"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">
+                Harga Normal / Coret (Rp)
+                <span class="text-slate-400 font-normal normal-case ml-1">— opsional</span>
+              </label>
+              <input type="number" id="form-harga-coret" min="0" placeholder="2500000"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
+              <p class="text-xs text-slate-400 mt-1">Isi jika ada promo. Badge % diskon otomatis muncul.</p>
+            </div>
+          </div>
+
+          <!-- Durasi -->
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">
+              Durasi <span class="text-red-500">*</span>
+            </label>
+            <input type="text" id="form-durasi" required placeholder="Contoh: 3 Hari 2 Malam"
+              class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
+          </div>
+
+          <!-- Deskripsi -->
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">
+              Deskripsi <span class="text-red-500">*</span>
+            </label>
+            <textarea id="form-deskripsi" required rows="3" placeholder="Deskripsi singkat paket wisata..."
+              class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none resize-none"></textarea>
+          </div>
+
+          <!-- Fasilitas -->
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Fasilitas</label>
+            <input type="text" id="form-fasilitas" placeholder="Contoh: Transport, Hotel, Snorkeling, Makan"
+              class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
+            <p class="text-xs text-slate-400 mt-1">Pisahkan dengan koma</p>
+          </div>
+
+          <!-- Badge & Rating -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Badge Text</label>
+              <input type="text" id="form-badge-text" placeholder="Contoh: Terfavorit"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Warna Badge</label>
+              <select id="form-badge-color"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none">
+                <option value="bg-amber-500">Kuning (Amber)</option>
+                <option value="bg-teal-600">Teal</option>
+                <option value="bg-rose-500">Merah (Rose)</option>
+                <option value="bg-pink-500">Pink</option>
+                <option value="bg-slate-700">Abu-abu</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Rating (0–5)</label>
+              <input type="number" id="form-rating" min="0" max="5" step="0.1" placeholder="4.8"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
+            </div>
+          </div>
+
+          <!-- Status Aktif -->
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="form-aktif" class="w-4 h-4 rounded accent-brand-600" checked />
+            <label for="form-aktif" class="text-sm font-medium text-slate-700">
+              Tampilkan paket di website (Aktif)
+            </label>
+          </div>
+
+          <!-- Tombol Aksi -->
+          <div class="flex gap-3 pt-2 border-t border-slate-100">
+            <button type="button" id="modal-cancel"
+              class="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-sm font-bold hover:bg-slate-50 transition">
+              Batal
+            </button>
+            <button type="submit" id="form-submit-btn"
+              class="flex-1 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold
+                     transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-floppy-disk"></i>
+              <span id="form-submit-text">Simpan Paket</span>
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div><!-- /modal-form -->
+
+
+    <!-- ================================================================== -->
+    <!-- MODAL: KONFIRMASI HAPUS PAKET                                        -->
+    <!-- ================================================================== -->
+    <div id="modal-hapus"
+      class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm">
+      <div class="bg-white rounded-2xl w-full max-w-sm p-6 shadow-2xl text-center">
+        <div class="w-14 h-14 rounded-full bg-red-100 text-red-500 flex items-center justify-center text-2xl mx-auto mb-4">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <h3 class="text-lg font-black text-slate-900">Hapus Paket?</h3>
+        <p id="hapus-nama-text" class="text-sm text-slate-500 mt-2">
+          Paket ini akan dihapus permanen dari database.
+        </p>
+        <div class="flex gap-3 mt-6">
+          <button id="hapus-cancel"
+            class="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-sm font-bold hover:bg-slate-50 transition">
+            Batal
+          </button>
+          <button id="hapus-confirm"
+            class="flex-1 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-white text-sm font-bold transition">
+            Ya, Hapus
+          </button>
+        </div>
+      </div>
+    </div><!-- /modal-hapus -->
+
+
+    <!-- ================================================================== -->
+    <!-- MODAL: FORM TAMBAH / EDIT HERO                                       -->
+    <!-- ================================================================== -->
+    <div id="modal-hero"
+      class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm">
+      <div class="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden">
+
+        <!-- Header Modal -->
+        <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+          <h2 id="modal-hero-title" class="text-lg font-black text-slate-900">Tambah Hero Image</h2>
+          <button id="modal-hero-close"
+            class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Form Hero -->
         <form id="hero-form" class="p-6 space-y-4">
           <input type="hidden" id="hero-form-id" />
 
-          <!-- Preview & Upload -->
+          <!-- Upload / URL Gambar -->
           <div>
-            <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Gambar <span class="text-red-500">*</span></label>
+            <label class="block text-xs font-bold uppercase text-slate-500 mb-2">
+              Gambar <span class="text-red-500">*</span>
+            </label>
             <div class="flex gap-4 items-start">
-              <div class="w-28 h-20 rounded-xl overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300 shrink-0 flex items-center justify-center" id="hero-img-wrap">
+              <div id="hero-img-wrap"
+                class="w-28 h-20 rounded-xl overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300
+                       shrink-0 flex items-center justify-center">
                 <img id="hero-img-preview" src="" class="w-full h-full object-cover hidden" />
-                <i class="fa-solid fa-image text-2xl text-slate-300" id="hero-img-placeholder"></i>
+                <i id="hero-img-placeholder" class="fa-solid fa-image text-2xl text-slate-300"></i>
               </div>
               <div class="flex-1 space-y-2">
-                <label class="flex items-center gap-2 cursor-pointer bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl px-3 py-2 text-sm transition">
+                <label class="flex items-center gap-2 cursor-pointer bg-slate-50 hover:bg-slate-100
+                              border border-slate-200 rounded-xl px-3 py-2 text-sm transition">
                   <i class="fa-solid fa-upload text-brand-600"></i>
                   <span class="text-slate-600">Upload file (maks 5MB)</span>
                   <input type="file" id="hero-gambar-file" accept="image/*" class="hidden" />
                 </label>
                 <p class="text-xs text-slate-400 text-center">— atau —</p>
                 <input type="url" id="hero-gambar-url" placeholder="https://... (URL gambar)"
-                  class="w-full px-3 py-2 text-sm bg-slate-50 rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
+                  class="w-full px-3 py-2 text-sm bg-slate-50 rounded-xl border border-slate-200
+                         focus:border-brand-500 focus:outline-none" />
               </div>
             </div>
           </div>
@@ -271,19 +715,30 @@
             </div>
           </div>
 
+          <!-- Tombol Aksi -->
           <div class="flex gap-3 pt-2 border-t border-slate-100">
-            <button type="button" id="modal-hero-cancel" class="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-sm font-bold hover:bg-slate-50 transition">Batal</button>
-            <button type="submit" id="hero-submit-btn" class="flex-1 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold transition flex items-center justify-center gap-2">
+            <button type="button" id="modal-hero-cancel"
+              class="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-sm font-bold hover:bg-slate-50 transition">
+              Batal
+            </button>
+            <button type="submit" id="hero-submit-btn"
+              class="flex-1 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold
+                     transition flex items-center justify-center gap-2">
               <i class="fa-solid fa-floppy-disk"></i>
               <span id="hero-submit-text">Simpan</span>
             </button>
           </div>
         </form>
-      </div>
-    </div>
 
-    <!-- ── MODAL KONFIRMASI HAPUS HERO ───────────────────────────────────── -->
-    <div id="modal-hapus-hero" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm">
+      </div>
+    </div><!-- /modal-hero -->
+
+
+    <!-- ================================================================== -->
+    <!-- MODAL: KONFIRMASI HAPUS HERO                                         -->
+    <!-- ================================================================== -->
+    <div id="modal-hapus-hero"
+      class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm">
       <div class="bg-white rounded-2xl w-full max-w-sm p-6 shadow-2xl text-center">
         <div class="w-14 h-14 rounded-full bg-red-100 text-red-500 flex items-center justify-center text-2xl mx-auto mb-4">
           <i class="fa-solid fa-triangle-exclamation"></i>
@@ -291,1134 +746,43 @@
         <h3 class="text-lg font-black text-slate-900">Hapus Gambar Hero?</h3>
         <p class="text-sm text-slate-500 mt-2">Gambar ini akan dihapus dari slideshow halaman utama.</p>
         <div class="flex gap-3 mt-6">
-          <button id="hapus-hero-cancel" class="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-sm font-bold hover:bg-slate-50 transition">Batal</button>
-          <button id="hapus-hero-confirm" class="flex-1 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-white text-sm font-bold transition">Ya, Hapus</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── SECTION TESTIMONI ──────────────────────────────────────────────── -->
-    <main id="section-testimoni" class="ml-60 flex-1 p-6 lg:p-8 hidden">
-      <div class="flex items-center justify-between mb-8">
-        <div>
-          <h1 class="text-2xl font-black text-slate-900">Manajemen Testimoni</h1>
-          <p class="text-sm text-slate-500 mt-0.5">Review dan approve testimoni dari wisatawan sebelum ditampilkan</p>
-        </div>
-        <div class="flex gap-2 flex-wrap">
-          <button data-testi-filter="pending"  class="testi-filter-btn active-testi px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500 text-white">Pending</button>
-          <button data-testi-filter="approved" class="testi-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">Approved</button>
-          <button data-testi-filter="rejected" class="testi-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">Rejected</button>
-          <button data-testi-filter="all"      class="testi-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">Semua</button>
-        </div>
-      </div>
-      <div id="testi-admin-list" class="space-y-4">
-        <div class="text-center py-12 text-slate-400">
-          <i class="fa-solid fa-spinner fa-spin text-2xl mb-2 block"></i> Memuat...
-        </div>
-      </div>
-    </main>
-
-    <!-- ── SECTION SETTINGS ───────────────────────────────────────────────── -->
-    <main id="section-settings" class="ml-60 flex-1 p-6 lg:p-8 hidden">
-
-      <div class="mb-8">
-        <h1 class="text-2xl font-black text-slate-900">Pengaturan Website</h1>
-        <p class="text-sm text-slate-500 mt-0.5">Ubah angka dan teks stats counter yang tampil di hero halaman utama</p>
-      </div>
-
-      <!-- Preview realtime -->
-      <div class="bg-slate-900 rounded-2xl p-6 mb-8">
-        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Preview Stats Counter</p>
-        <div id="settings-preview" class="grid grid-cols-2 md:grid-cols-4 gap-4 text-white text-center">
-          <!-- diisi JS -->
-        </div>
-      </div>
-
-      <!-- Form edit stats -->
-      <form id="settings-form" class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 lg:p-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="settings-fields">
-          <!-- diisi JS -->
-        </div>
-
-        <div class="pt-6 mt-6 border-t border-slate-100 flex justify-end gap-3">
-          <button type="button" id="settings-reset-btn"
-            class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-sm font-bold hover:bg-slate-50 transition">
-            Reset ke Default
+          <button id="hapus-hero-cancel"
+            class="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-sm font-bold hover:bg-slate-50 transition">
+            Batal
           </button>
-          <button type="submit" id="settings-save-btn"
-            class="px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold transition flex items-center gap-2 shadow-lg shadow-brand-600/20">
-            <i class="fa-solid fa-floppy-disk"></i>
-            <span id="settings-save-text">Simpan Perubahan</span>
+          <button id="hapus-hero-confirm"
+            class="flex-1 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-white text-sm font-bold transition">
+            Ya, Hapus
           </button>
         </div>
-      </form>
-
-    </main>
-
-    <!-- ── MODAL FORM TAMBAH/EDIT ─────────────────────────────────────────── -->
-    <div id="modal-form" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm">
-      <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
-
-        <!-- Modal Header -->
-        <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 sticky top-0 bg-white z-10">
-          <h2 id="modal-title" class="text-lg font-black text-slate-900">Tambah Paket Wisata</h2>
-          <button id="modal-close" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-
-        <!-- Form -->
-        <form id="paket-form" class="p-6 space-y-5" enctype="multipart/form-data">
-          <input type="hidden" id="form-id" />
-
-          <!-- Gambar -->
-          <div>
-            <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Gambar Paket</label>
-            <div class="flex gap-4 items-start">
-              <!-- Preview -->
-              <div class="w-32 h-24 rounded-xl overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300 shrink-0 flex items-center justify-center" id="img-preview-wrap">
-                <img id="img-preview" src="" alt="" class="w-full h-full object-cover hidden" />
-                <i class="fa-solid fa-image text-2xl text-slate-300" id="img-placeholder"></i>
-              </div>
-              <div class="flex-1 space-y-2">
-                <label class="flex items-center gap-2 cursor-pointer bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl px-3 py-2 text-sm transition">
-                  <i class="fa-solid fa-upload text-brand-600"></i>
-                  <span class="text-slate-600">Upload file (maks 5MB)</span>
-                  <input type="file" id="form-gambar-file" accept="image/*" class="hidden" />
-                </label>
-                <p class="text-xs text-slate-400 text-center">— atau —</p>
-                <input
-                  type="url"
-                  id="form-gambar-url"
-                  placeholder="https://... (URL gambar)"
-                  class="w-full px-3 py-2 text-sm bg-slate-50 rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none"
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- Nama & Lokasi -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Nama Paket <span class="text-red-500">*</span></label>
-              <input type="text" id="form-nama" required placeholder="Contoh: Surga Bahari Gili T."
-                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
-            </div>
-            <div>
-              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Lokasi <span class="text-red-500">*</span></label>
-              <input type="text" id="form-lokasi" required placeholder="Contoh: Lombok Utara, NTB"
-                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
-            </div>
-          </div>
-
-          <!-- Wilayah & Kategori -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Wilayah</label>
-              <select id="form-wilayah" class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none">
-                <option value="lombok">Lombok</option>
-                <option value="sumbawa">Sumbawa & Bima</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Kategori</label>
-              <select id="form-kategori" class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none">
-                <option value="pantai">Pantai & Bahari</option>
-                <option value="petualangan">Petualangan & Alam</option>
-                <option value="budaya">Budaya & Tradisi</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Harga & Durasi -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Harga Promo (Rp) <span class="text-red-500">*</span></label>
-              <input type="number" id="form-harga" required min="0" placeholder="1850000"
-                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
-            </div>
-            <div>
-              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">
-                Harga Normal / Coret (Rp)
-                <span class="text-slate-400 font-normal normal-case ml-1">— opsional</span>
-              </label>
-              <input type="number" id="form-harga-coret" min="0" placeholder="2500000"
-                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
-              <p class="text-xs text-slate-400 mt-1">Isi jika sedang ada campaign/promo. Badge % diskon otomatis muncul.</p>
-            </div>
-          </div>
-
-          <!-- Durasi -->
-          <div>
-              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Durasi <span class="text-red-500">*</span></label>
-              <input type="text" id="form-durasi" required placeholder="Contoh: 3 Hari 2 Malam"
-                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
-          </div>
-
-          <!-- Deskripsi -->
-          <div>
-            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Deskripsi <span class="text-red-500">*</span></label>
-            <textarea id="form-deskripsi" required rows="3" placeholder="Deskripsi singkat paket wisata..."
-              class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none resize-none"></textarea>
-          </div>
-
-          <!-- Fasilitas -->
-          <div>
-            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Fasilitas</label>
-            <input type="text" id="form-fasilitas" placeholder="Contoh: Transport, Hotel, Snorkeling, Makan"
-              class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
-            <p class="text-xs text-slate-400 mt-1">Pisahkan dengan koma</p>
-          </div>
-
-          <!-- Badge & Rating -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div>
-              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Badge Text</label>
-              <input type="text" id="form-badge-text" placeholder="Contoh: Terfavorit"
-                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
-            </div>
-            <div>
-              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Warna Badge</label>
-              <select id="form-badge-color" class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none">
-                <option value="bg-amber-500">Kuning (Amber)</option>
-                <option value="bg-teal-600">Teal</option>
-                <option value="bg-rose-500">Merah (Rose)</option>
-                <option value="bg-pink-500">Pink</option>
-                <option value="bg-slate-700">Abu-abu</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Rating (0–5)</label>
-              <input type="number" id="form-rating" min="0" max="5" step="0.1" placeholder="4.8"
-                class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
-            </div>
-          </div>
-
-          <!-- Status Aktif -->
-          <div class="flex items-center gap-3">
-            <input type="checkbox" id="form-aktif" class="w-4 h-4 rounded accent-brand-600" checked />
-            <label for="form-aktif" class="text-sm font-medium text-slate-700">Tampilkan paket di website (Aktif)</label>
-          </div>
-
-          <!-- Actions -->
-          <div class="flex gap-3 pt-2 border-t border-slate-100">
-            <button type="button" id="modal-cancel" class="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-sm font-bold hover:bg-slate-50 transition">
-              Batal
-            </button>
-            <button type="submit" id="form-submit-btn" class="flex-1 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold transition flex items-center justify-center gap-2">
-              <i class="fa-solid fa-floppy-disk"></i>
-              <span id="form-submit-text">Simpan Paket</span>
-            </button>
-          </div>
-        </form>
       </div>
-    </div>
+    </div><!-- /modal-hapus-hero -->
 
-    <!-- ── MODAL KONFIRMASI HAPUS ─────────────────────────────────────────── -->
-    <div id="modal-hapus" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm">
-      <div class="bg-white rounded-2xl w-full max-w-sm p-6 shadow-2xl text-center">
-        <div class="w-14 h-14 rounded-full bg-red-100 text-red-500 flex items-center justify-center text-2xl mx-auto mb-4">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-        </div>
-        <h3 class="text-lg font-black text-slate-900">Hapus Paket?</h3>
-        <p class="text-sm text-slate-500 mt-2" id="hapus-nama-text">Paket ini akan dihapus permanen dari database.</p>
-        <div class="flex gap-3 mt-6">
-          <button id="hapus-cancel" class="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-sm font-bold hover:bg-slate-50 transition">Batal</button>
-          <button id="hapus-confirm" class="flex-1 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-white text-sm font-bold transition">Ya, Hapus</button>
-        </div>
-      </div>
-    </div>
 
-    <!-- ── TOAST ──────────────────────────────────────────────────────────── -->
-    <div id="admin-toast" class="fixed bottom-6 right-6 z-50 hidden bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl border border-slate-700 flex items-center gap-3 transition-all duration-300">
-      <div id="admin-toast-icon" class="w-7 h-7 rounded-full bg-emerald-500 flex items-center justify-center text-slate-900 font-bold shrink-0 text-sm">
+    <!-- ================================================================== -->
+    <!-- TOAST NOTIFICATION                                                   -->
+    <!-- ================================================================== -->
+    <div id="admin-toast"
+      class="fixed bottom-6 right-6 z-50 hidden bg-slate-900 text-white px-5 py-3
+             rounded-2xl shadow-2xl border border-slate-700 flex items-center gap-3 transition-all duration-300">
+      <div id="admin-toast-icon"
+        class="w-7 h-7 rounded-full bg-emerald-500 flex items-center justify-center text-slate-900 font-bold shrink-0 text-sm">
         <i class="fa-solid fa-check"></i>
       </div>
       <span id="admin-toast-msg" class="text-sm font-medium">Berhasil!</span>
     </div>
 
-    <script>
-      // ── CONFIG ──────────────────────────────────────────────────────────────
-      const API = "/api/paket";
-      // Password dibaca dari .env via endpoint /api/admin/check-password
-      // Tidak pernah dikirim plaintext dari server ke client
-      const ADMIN_PASSWORD = null; // tidak digunakan langsung
 
-      // ── STATE ───────────────────────────────────────────────────────────────
-      let allPaket = [];
-      let editingId = null;
-      let hapusId = null;
+    <!-- ================================================================== -->
+    <!-- JAVASCRIPT MODULES                                                   -->
+    <!-- Urutan penting: core dulu, lalu modul per fitur                     -->
+    <!-- ================================================================== -->
+    <script src="/admin/js/admin-core.js"></script>
+    <script src="/admin/js/admin-dashboard.js"></script>
+    <script src="/admin/js/admin-paket.js"></script>
+    <script src="/admin/js/admin-hero.js"></script>
+    <script src="/admin/js/admin-testimoni.js"></script>
+    <script src="/admin/js/admin-settings.js"></script>
 
-      // ── ELEMENTS ────────────────────────────────────────────────────────────
-      const loginOverlay  = document.getElementById("login-overlay");
-      const loginForm     = document.getElementById("login-form");
-      const loginPassword = document.getElementById("login-password");
-      const loginError    = document.getElementById("login-error");
-      const adminPanel    = document.getElementById("admin-panel");
-      const logoutBtn     = document.getElementById("logout-btn");
-
-      const tableBody     = document.getElementById("table-body");
-      const btnTambah     = document.getElementById("btn-tambah");
-
-      const modalForm     = document.getElementById("modal-form");
-      const modalTitle    = document.getElementById("modal-title");
-      const modalClose    = document.getElementById("modal-close");
-      const modalCancel   = document.getElementById("modal-cancel");
-      const paketForm     = document.getElementById("paket-form");
-
-      const modalHapus    = document.getElementById("modal-hapus");
-      const hapusNamaText = document.getElementById("hapus-nama-text");
-      const hapusCancel   = document.getElementById("hapus-cancel");
-      const hapusConfirm  = document.getElementById("hapus-confirm");
-
-      const filterSearch  = document.getElementById("filter-search");
-      const filterWilayah = document.getElementById("filter-wilayah");
-      const filterKategori= document.getElementById("filter-kategori");
-
-      // ── LOGIN ───────────────────────────────────────────────────────────────
-      function checkLogin() {
-        if (sessionStorage.getItem("lt_admin") === "1") {
-          loginOverlay.classList.add("hidden");
-          adminPanel.classList.remove("hidden");
-          adminPanel.classList.add("flex");
-          loadPaket();
-        }
-      }
-
-      loginForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const btn = loginForm.querySelector("button[type=submit]");
-        btn.disabled = true;
-        btn.textContent = "Memeriksa...";
-
-        try {
-          const res = await fetch("/api/admin/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ password: loginPassword.value }),
-          });
-
-          if (res.ok) {
-            sessionStorage.setItem("lt_admin", "1");
-            loginError.classList.add("hidden");
-            loginOverlay.classList.add("hidden");
-            adminPanel.classList.remove("hidden");
-            adminPanel.classList.add("flex");
-            loadPaket();
-          } else {
-            loginError.classList.remove("hidden");
-            loginPassword.value = "";
-            loginPassword.focus();
-          }
-        } catch {
-          loginError.textContent = "Gagal terhubung ke server.";
-          loginError.classList.remove("hidden");
-        } finally {
-          btn.disabled = false;
-          btn.textContent = "Masuk ke Admin Panel";
-        }
-      });
-
-      logoutBtn.addEventListener("click", () => {
-        sessionStorage.removeItem("lt_admin");
-        location.reload();
-      });
-
-      // ── NAVIGASI SECTION ────────────────────────────────────────────────────
-      const sectionPaket    = document.querySelector("main:not(#section-hero):not(#section-testimoni):not(#section-settings)");
-      const sectionHero     = document.getElementById("section-hero");
-      const sectionTestimoni= document.getElementById("section-testimoni");
-      const sectionSettings = document.getElementById("section-settings");
-
-      document.querySelectorAll(".nav-link[data-section]").forEach((link) => {
-        link.addEventListener("click", (e) => {
-          e.preventDefault();
-          const section = link.dataset.section;
-
-          document.querySelectorAll(".nav-link").forEach((l) => {
-            l.classList.remove("bg-brand-600", "text-white");
-            l.classList.add("text-slate-300", "hover:bg-slate-800", "hover:text-white");
-          });
-          link.classList.add("bg-brand-600", "text-white");
-          link.classList.remove("text-slate-300");
-
-          sectionPaket.classList.add("hidden");
-          sectionHero.classList.add("hidden");
-          sectionTestimoni.classList.add("hidden");
-          sectionSettings.classList.add("hidden");
-
-          if (section === "paket") {
-            sectionPaket.classList.remove("hidden");
-          } else if (section === "hero") {
-            sectionHero.classList.remove("hidden");
-            loadHero();
-          } else if (section === "testimoni") {
-            sectionTestimoni.classList.remove("hidden");
-            loadTestimoni();
-          } else if (section === "settings") {
-            sectionSettings.classList.remove("hidden");
-            loadSettings();
-          }
-        });
-      });
-
-      // ── SETTINGS ─────────────────────────────────────────────────────────────
-      const SETTINGS_API   = "/api/settings";
-      const settingsFields = document.getElementById("settings-fields");
-      const settingsPreview= document.getElementById("settings-preview");
-      const settingsForm   = document.getElementById("settings-form");
-      const settingsSaveBtn= document.getElementById("settings-save-btn");
-      const settingsSaveTxt= document.getElementById("settings-save-text");
-
-      const WARNA_OPTIONS = [
-        { value: "text-amber-400",   label: "Kuning (Amber)" },
-        { value: "text-teal-400",    label: "Teal" },
-        { value: "text-emerald-400", label: "Hijau (Emerald)" },
-        { value: "text-cyan-400",    label: "Cyan" },
-        { value: "text-rose-400",    label: "Merah (Rose)" },
-        { value: "text-violet-400",  label: "Ungu" },
-        { value: "text-white",       label: "Putih" },
-      ];
-
-      const DEFAULT_SETTINGS = {
-        stat_1_nilai: "8.500+", stat_1_label: "Wisatawan Puas",    stat_1_warna: "text-amber-400",
-        stat_2_nilai: "50+",    stat_2_label: "Destinasi NTB",     stat_2_warna: "text-teal-400",
-        stat_3_nilai: "98.7%",  stat_3_label: "Ulasan Bintang 5",  stat_3_warna: "text-emerald-400",
-        stat_4_nilai: "7+ Thn", stat_4_label: "Melayani Wisata NTB", stat_4_warna: "text-cyan-400",
-      };
-
-      async function loadSettings() {
-        try {
-          const res  = await fetch(SETTINGS_API);
-          const json = await res.json();
-          const s    = json.data || {};
-          renderSettingsForm(s);
-          renderSettingsPreview(s);
-        } catch (e) {
-          showToast("Gagal memuat settings", false);
-        }
-      }
-
-      function renderSettingsForm(s) {
-        settingsFields.innerHTML = [1, 2, 3, 4].map((n) => {
-          const nilai = s[`stat_${n}_nilai`]?.value || "";
-          const label = s[`stat_${n}_label`]?.value || "";
-          const warna = s[`stat_${n}_warna`]?.value || "text-white";
-          const warnaOpts = WARNA_OPTIONS.map((o) =>
-            `<option value="${o.value}" ${warna === o.value ? "selected" : ""}>${o.label}</option>`
-          ).join("");
-
-          return `
-            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100 space-y-3">
-              <p class="text-xs font-black text-slate-500 uppercase tracking-widest">Stat ${n}</p>
-              <div>
-                <label class="block text-xs font-bold text-slate-500 mb-1">Nilai / Angka</label>
-                <input type="text" name="stat_${n}_nilai" value="${nilai}"
-                  placeholder="Contoh: 10.000+"
-                  class="settings-input w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
-              </div>
-              <div>
-                <label class="block text-xs font-bold text-slate-500 mb-1">Label / Keterangan</label>
-                <input type="text" name="stat_${n}_label" value="${label}"
-                  placeholder="Contoh: Wisatawan Puas"
-                  class="settings-input w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none" />
-              </div>
-              <div>
-                <label class="block text-xs font-bold text-slate-500 mb-1">Warna Nilai</label>
-                <select name="stat_${n}_warna"
-                  class="settings-input w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-brand-500 focus:outline-none">
-                  ${warnaOpts}
-                </select>
-              </div>
-            </div>`;
-        }).join("");
-
-        // Live preview saat input berubah
-        settingsFields.querySelectorAll(".settings-input").forEach((input) => {
-          input.addEventListener("input", updatePreviewFromForm);
-          input.addEventListener("change", updatePreviewFromForm);
-        });
-      }
-
-      function renderSettingsPreview(s) {
-        settingsPreview.innerHTML = [1, 2, 3, 4].map((n) => `
-          <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-            <div id="prev-nilai-${n}" class="text-2xl font-black ${s[`stat_${n}_warna`]?.value || "text-white"}">
-              ${s[`stat_${n}_nilai`]?.value || "-"}
-            </div>
-            <div id="prev-label-${n}" class="text-xs text-slate-400 mt-1">
-              ${s[`stat_${n}_label`]?.value || ""}
-            </div>
-          </div>`).join("");
-      }
-
-      function updatePreviewFromForm() {
-        [1, 2, 3, 4].forEach((n) => {
-          const nilai = settingsFields.querySelector(`[name="stat_${n}_nilai"]`)?.value || "-";
-          const label = settingsFields.querySelector(`[name="stat_${n}_label"]`)?.value || "";
-          const warna = settingsFields.querySelector(`[name="stat_${n}_warna"]`)?.value || "text-white";
-
-          const elNilai = document.getElementById(`prev-nilai-${n}`);
-          const elLabel = document.getElementById(`prev-label-${n}`);
-          if (elNilai) { elNilai.textContent = nilai; elNilai.className = `text-2xl font-black ${warna}`; }
-          if (elLabel) elLabel.textContent = label;
-        });
-      }
-
-      settingsForm?.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        settingsSaveBtn.disabled = true;
-        settingsSaveTxt.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
-
-        const body = {};
-        settingsFields.querySelectorAll(".settings-input").forEach((input) => {
-          body[input.name] = input.value;
-        });
-
-        try {
-          const res  = await fetch(SETTINGS_API, {
-            method:  "PUT",
-            headers: { "Content-Type": "application/json" },
-            body:    JSON.stringify(body),
-          });
-          const json = await res.json();
-          if (!res.ok) throw new Error(json.message);
-          showToast("✅ Pengaturan berhasil disimpan!", true);
-        } catch (err) {
-          showToast("Gagal: " + err.message, false);
-        } finally {
-          settingsSaveBtn.disabled = false;
-          settingsSaveTxt.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan';
-        }
-      });
-
-      document.getElementById("settings-reset-btn")?.addEventListener("click", () => {
-        if (!confirm("Reset semua stats ke nilai default?")) return;
-        fetch(SETTINGS_API, {
-          method:  "PUT",
-          headers: { "Content-Type": "application/json" },
-          body:    JSON.stringify(DEFAULT_SETTINGS),
-        }).then(() => { loadSettings(); showToast("Settings direset ke default", true); });
-      });
-
-      // ── HERO CRUD ────────────────────────────────────────────────────────────
-      const HERO_API       = "/api/hero";
-      const heroGrid       = document.getElementById("hero-grid");
-      const modalHero      = document.getElementById("modal-hero");
-      const modalHeroTitle = document.getElementById("modal-hero-title");
-      const modalHeroClose = document.getElementById("modal-hero-close");
-      const modalHeroCancel= document.getElementById("modal-hero-cancel");
-      const heroForm       = document.getElementById("hero-form");
-      const heroSubmitBtn  = document.getElementById("hero-submit-btn");
-      const heroSubmitText = document.getElementById("hero-submit-text");
-      const modalHapusHero = document.getElementById("modal-hapus-hero");
-
-      let editingHeroId = null;
-      let hapusHeroId   = null;
-
-      async function loadHero() {
-        heroGrid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400"><i class="fa-solid fa-spinner fa-spin text-2xl mb-2 block"></i> Memuat...</div>`;
-        try {
-          const res  = await fetch(HERO_API);
-          const json = await res.json();
-          renderHeroGrid(json.data || []);
-        } catch (e) {
-          heroGrid.innerHTML = `<div class="col-span-full text-center py-12 text-red-400">Gagal memuat: ${e.message}</div>`;
-        }
-      }
-
-      function renderHeroGrid(heroes) {
-        if (heroes.length === 0) {
-          heroGrid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400"><i class="fa-solid fa-images text-3xl mb-2 block"></i><p>Belum ada gambar hero. Tambahkan sekarang.</p></div>`;
-          return;
-        }
-
-        heroGrid.innerHTML = heroes.map((h) => `
-          <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
-            <div class="relative h-44 overflow-hidden bg-slate-100">
-              <img src="${h.gambar}" alt="${h.judul || ''}"
-                class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-                onerror="this.src='https://placehold.co/400x200/e2e8f0/94a3b8?text=No+Image'" />
-              <!-- Urutan badge -->
-              <div class="absolute top-3 left-3 w-7 h-7 rounded-full bg-brand-600 text-white text-xs font-black flex items-center justify-center shadow">
-                ${h.urutan}
-              </div>
-              <!-- Status badge -->
-              <div class="absolute top-3 right-3">
-                <span class="text-xs font-bold px-2 py-1 rounded-full ${h.aktif ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-500'}">
-                  ${h.aktif ? '✓ Aktif' : '✗ Nonaktif'}
-                </span>
-              </div>
-            </div>
-            <div class="p-4">
-              <p class="font-bold text-slate-800 text-sm truncate">${h.judul || '<span class="text-slate-400 italic">Tanpa judul</span>'}</p>
-              <p class="text-xs text-slate-400 mt-0.5 truncate">${h.subjudul || ''}</p>
-              <div class="flex gap-2 mt-4">
-                <button onclick="openEditHero(${h.id})"
-                  class="flex-1 py-1.5 rounded-lg bg-brand-50 text-brand-600 hover:bg-brand-600 hover:text-white text-xs font-bold transition flex items-center justify-center gap-1">
-                  <i class="fa-solid fa-pen"></i> Edit
-                </button>
-                <button onclick="openHapusHero(${h.id})"
-                  class="flex-1 py-1.5 rounded-lg bg-red-50 text-red-500 hover:bg-red-500 hover:text-white text-xs font-bold transition flex items-center justify-center gap-1">
-                  <i class="fa-solid fa-trash"></i> Hapus
-                </button>
-              </div>
-            </div>
-          </div>
-        `).join("");
-      }
-
-      // Buka modal tambah
-      document.getElementById("btn-tambah-hero").addEventListener("click", () => {
-        editingHeroId = null;
-        heroForm.reset();
-        resetHeroPreview();
-        document.getElementById("hero-aktif").checked = true;
-        modalHeroTitle.textContent = "Tambah Hero Image";
-        heroSubmitText.textContent = "Simpan";
-        modalHero.classList.remove("hidden");
-        modalHero.classList.add("flex");
-      });
-
-      // Tutup modal hero
-      function closeHeroModal() {
-        modalHero.classList.add("hidden");
-        modalHero.classList.remove("flex");
-        heroForm.reset();
-        resetHeroPreview();
-        editingHeroId = null;
-      }
-      modalHeroClose.addEventListener("click",  closeHeroModal);
-      modalHeroCancel.addEventListener("click", closeHeroModal);
-      modalHero.addEventListener("click", (e) => { if (e.target === modalHero) closeHeroModal(); });
-
-      // Buka edit
-      function openEditHero(id) {
-        fetch(`${HERO_API}/${id}`)
-          .then((r) => r.json())
-          .then(({ data: h }) => {
-            editingHeroId = h.id;
-            document.getElementById("hero-form-id").value      = h.id;
-            document.getElementById("hero-judul-input").value  = h.judul    || "";
-            document.getElementById("hero-subjudul-input").value = h.subjudul || "";
-            document.getElementById("hero-urutan").value       = h.urutan;
-            document.getElementById("hero-aktif").checked      = Boolean(h.aktif);
-            document.getElementById("hero-gambar-url").value   = h.gambar?.startsWith("/uploads/") ? "" : (h.gambar || "");
-            if (h.gambar) showHeroPreview(h.gambar);
-            else resetHeroPreview();
-            modalHeroTitle.textContent = "Edit Hero Image";
-            heroSubmitText.textContent = "Update";
-            modalHero.classList.remove("hidden");
-            modalHero.classList.add("flex");
-          });
-      }
-      window.openEditHero = openEditHero;
-
-      // Submit form hero
-      heroForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        heroSubmitBtn.disabled = true;
-        heroSubmitText.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
-
-        const formData = new FormData();
-        formData.append("judul",    document.getElementById("hero-judul-input").value);
-        formData.append("subjudul", document.getElementById("hero-subjudul-input").value);
-        formData.append("urutan",   document.getElementById("hero-urutan").value || "");
-        formData.append("aktif",    document.getElementById("hero-aktif").checked ? "1" : "0");
-
-        const file    = document.getElementById("hero-gambar-file").files[0];
-        const gambarUrl = document.getElementById("hero-gambar-url").value;
-        if (file)           formData.append("gambar", file);
-        else if (gambarUrl) formData.append("gambar_url", gambarUrl);
-
-        try {
-          const url    = editingHeroId ? `${HERO_API}/${editingHeroId}` : HERO_API;
-          const method = editingHeroId ? "PUT" : "POST";
-          const res    = await fetch(url, { method, body: formData });
-          const json   = await res.json();
-          if (!res.ok) throw new Error(json.message);
-          closeHeroModal();
-          await loadHero();
-          showToast(editingHeroId ? "Hero image diupdate!" : "Hero image ditambahkan!", true);
-        } catch (err) {
-          showToast("Gagal: " + err.message, false);
-        } finally {
-          heroSubmitBtn.disabled = false;
-          heroSubmitText.textContent = editingHeroId ? "Update" : "Simpan";
-        }
-      });
-
-      // Hapus hero
-      function openHapusHero(id) {
-        hapusHeroId = id;
-        modalHapusHero.classList.remove("hidden");
-        modalHapusHero.classList.add("flex");
-      }
-      window.openHapusHero = openHapusHero;
-
-      document.getElementById("hapus-hero-cancel").addEventListener("click", () => {
-        modalHapusHero.classList.add("hidden");
-        modalHapusHero.classList.remove("flex");
-      });
-
-      document.getElementById("hapus-hero-confirm").addEventListener("click", async () => {
-        if (!hapusHeroId) return;
-        await fetch(`${HERO_API}/${hapusHeroId}`, { method: "DELETE" });
-        modalHapusHero.classList.add("hidden");
-        modalHapusHero.classList.remove("flex");
-        await loadHero();
-        showToast("Hero image dihapus", true);
-        hapusHeroId = null;
-      });
-
-      // Preview gambar hero
-      document.getElementById("hero-gambar-file").addEventListener("change", (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-          showHeroPreview(ev.target.result);
-          document.getElementById("hero-gambar-url").value = "";
-        };
-        reader.readAsDataURL(file);
-      });
-
-      document.getElementById("hero-gambar-url").addEventListener("input", (e) => {
-        const url = e.target.value.trim();
-        if (url) {
-          showHeroPreview(url);
-          document.getElementById("hero-gambar-file").value = "";
-        } else {
-          resetHeroPreview();
-        }
-      });
-
-      function showHeroPreview(src) {
-        const img = document.getElementById("hero-img-preview");
-        const ph  = document.getElementById("hero-img-placeholder");
-        img.src = src;
-        img.classList.remove("hidden");
-        ph.classList.add("hidden");
-      }
-
-      function resetHeroPreview() {
-        const img = document.getElementById("hero-img-preview");
-        const ph  = document.getElementById("hero-img-placeholder");
-        img.src = "";
-        img.classList.add("hidden");
-        ph.classList.remove("hidden");
-      }
-
-      checkLogin();
-
-      // ── TESTIMONI ADMIN ──────────────────────────────────────────────────────
-      const TESTI_API       = "/api/testimoni";
-      const testiAdminList  = document.getElementById("testi-admin-list");
-      const testiBadge      = document.getElementById("testi-badge");
-      let   testiFilter     = "pending";
-
-      async function loadTestimoni() {
-        testiAdminList.innerHTML = `<div class="text-center py-12 text-slate-400"><i class="fa-solid fa-spinner fa-spin text-2xl mb-2 block"></i> Memuat...</div>`;
-        try {
-          const param = testiFilter === "all" ? "all" : testiFilter;
-          const res   = await fetch(`${TESTI_API}?status=${param}`);
-          const json  = await res.json();
-          renderTestiAdmin(json.data || []);
-
-          // Update badge pending
-          const resPending  = await fetch(`${TESTI_API}?status=pending`);
-          const jsonPending = await resPending.json();
-          const pendingCount = (jsonPending.data || []).length;
-          if (pendingCount > 0) {
-            testiBadge.textContent = pendingCount;
-            testiBadge.classList.remove("hidden");
-          } else {
-            testiBadge.classList.add("hidden");
-          }
-        } catch (e) {
-          testiAdminList.innerHTML = `<div class="text-center py-8 text-red-400">Gagal memuat: ${e.message}</div>`;
-        }
-      }
-
-      function renderTestiAdmin(list) {
-        if (list.length === 0) {
-          testiAdminList.innerHTML = `<div class="text-center py-12 text-slate-400"><i class="fa-solid fa-comment-slash text-3xl mb-2 block"></i><p>Tidak ada testimoni ${testiFilter === "all" ? "" : testiFilter}.</p></div>`;
-          return;
-        }
-
-        const statusColor = { pending: "bg-amber-100 text-amber-700", approved: "bg-emerald-100 text-emerald-700", rejected: "bg-red-100 text-red-500" };
-        const stars = (r) => Array.from({ length: 5 }, (_, i) =>
-          `<i class="fa-${i < r ? "solid" : "regular"} fa-star text-amber-400 text-xs"></i>`).join("");
-
-        testiAdminList.innerHTML = list.map((t) => `
-          <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex flex-col sm:flex-row gap-4">
-            <!-- Avatar -->
-            <div class="shrink-0">
-              ${t.foto
-                ? `<img src="${t.foto}" class="w-12 h-12 rounded-full object-cover" onerror="this.src='https://placehold.co/48/e2e8f0/94a3b8?text=${t.nama[0]}'" />`
-                : `<div class="w-12 h-12 rounded-full bg-brand-100 text-brand-700 font-black text-sm flex items-center justify-center">${t.nama.split(" ").map((w)=>w[0]).slice(0,2).join("").toUpperCase()}</div>`}
-            </div>
-
-            <!-- Konten -->
-            <div class="flex-1 min-w-0">
-              <div class="flex items-start justify-between gap-2 flex-wrap">
-                <div>
-                  <p class="font-bold text-slate-900 text-sm">${t.nama} ${t.asal ? `<span class="text-slate-400 font-normal">· ${t.asal}</span>` : ""}</p>
-                  <div class="flex gap-0.5 mt-0.5">${stars(t.rating)}</div>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-xs font-bold px-2 py-0.5 rounded-full ${statusColor[t.status] || "bg-slate-100 text-slate-600"}">${t.status}</span>
-                  <span class="text-xs text-slate-400">${new Date(t.created_at).toLocaleDateString("id-ID", { day:"numeric", month:"short", year:"numeric" })}</span>
-                </div>
-              </div>
-              ${t.paket ? `<p class="text-xs text-brand-600 font-semibold mt-1"><i class="fa-solid fa-suitcase-rolling mr-1"></i>${t.paket}</p>` : ""}
-              <p class="text-sm text-slate-600 mt-2 leading-relaxed">"${t.pesan}"</p>
-            </div>
-
-            <!-- Aksi -->
-            <div class="shrink-0 flex sm:flex-col gap-2">
-              ${t.status !== "approved" ? `<button onclick="setTestiStatus(${t.id},'approved')" class="px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-500 hover:text-white text-xs font-bold transition flex items-center gap-1"><i class="fa-solid fa-check"></i> Approve</button>` : ""}
-              ${t.status !== "rejected" ? `<button onclick="setTestiStatus(${t.id},'rejected')" class="px-3 py-1.5 rounded-lg bg-red-50 text-red-500 hover:bg-red-500 hover:text-white text-xs font-bold transition flex items-center gap-1"><i class="fa-solid fa-xmark"></i> Reject</button>` : ""}
-              <button onclick="hapusTesti(${t.id})" class="px-3 py-1.5 rounded-lg bg-slate-50 text-slate-500 hover:bg-slate-200 text-xs font-bold transition flex items-center gap-1"><i class="fa-solid fa-trash"></i> Hapus</button>
-            </div>
-          </div>
-        `).join("");
-      }
-
-      async function setTestiStatus(id, status) {
-        await fetch(`${TESTI_API}/${id}/status`, {
-          method:  "PUT",
-          headers: { "Content-Type": "application/json" },
-          body:    JSON.stringify({ status }),
-        });
-        await loadTestimoni();
-        showToast(`Testimoni ${status === "approved" ? "disetujui ✅" : "ditolak"}`, status === "approved");
-      }
-      window.setTestiStatus = setTestiStatus;
-
-      async function hapusTesti(id) {
-        if (!confirm("Hapus testimoni ini permanen?")) return;
-        await fetch(`${TESTI_API}/${id}`, { method: "DELETE" });
-        await loadTestimoni();
-        showToast("Testimoni dihapus", true);
-      }
-      window.hapusTesti = hapusTesti;
-
-      // Filter tabs testimoni
-      document.querySelectorAll(".testi-filter-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          testiFilter = btn.dataset.testiFilter;
-          document.querySelectorAll(".testi-filter-btn").forEach((b) => {
-            b.classList.remove("active-testi", "bg-amber-500", "text-white", "bg-brand-600");
-            b.classList.add("bg-white", "text-slate-600", "border", "border-slate-200");
-          });
-          btn.classList.add("active-testi", "bg-brand-600", "text-white");
-          btn.classList.remove("bg-white", "text-slate-600", "border", "border-slate-200");
-          loadTestimoni();
-        });
-      });
-
-      // ── LOAD DATA ───────────────────────────────────────────────────────────
-      async function loadPaket() {
-        try {
-          const res = await fetch(API);
-          const json = await res.json();
-          allPaket = json.data || [];
-          updateStats();
-          renderTable();
-          // Update badge testimoni pending
-          fetch(`${TESTI_API}?status=pending`).then(r=>r.json()).then(j=>{
-            const n = (j.data||[]).length;
-            if (n > 0) { testiBadge.textContent = n; testiBadge.classList.remove("hidden"); }
-          }).catch(()=>{});
-        } catch (e) {
-          tableBody.innerHTML = `<tr><td colspan="7" class="text-center py-12 text-red-400">Gagal memuat data: ${e.message}</td></tr>`;
-        }
-      }
-
-      function updateStats() {
-        document.getElementById("stat-total").textContent   = allPaket.length;
-        document.getElementById("stat-aktif").textContent   = allPaket.filter(p => p.aktif).length;
-        document.getElementById("stat-lombok").textContent  = allPaket.filter(p => p.wilayah === "lombok").length;
-        document.getElementById("stat-sumbawa").textContent = allPaket.filter(p => p.wilayah === "sumbawa").length;
-      }
-
-      // ── RENDER TABLE ────────────────────────────────────────────────────────
-      function renderTable() {
-        const q        = filterSearch.value.toLowerCase();
-        const wilayah  = filterWilayah.value;
-        const kategori = filterKategori.value;
-
-        const filtered = allPaket.filter(p => {
-          const matchQ = !q || p.nama.toLowerCase().includes(q) || p.lokasi.toLowerCase().includes(q);
-          const matchW = !wilayah  || p.wilayah  === wilayah;
-          const matchK = !kategori || p.kategori === kategori;
-          return matchQ && matchW && matchK;
-        });
-
-        if (filtered.length === 0) {
-          tableBody.innerHTML = `<tr><td colspan="7" class="text-center py-12 text-slate-400">Tidak ada paket ditemukan</td></tr>`;
-          return;
-        }
-
-        tableBody.innerHTML = filtered.map(p => `
-          <tr class="hover:bg-slate-50 transition">
-            <td class="px-4 py-3">
-              <div class="flex items-center gap-3">
-                <img src="${p.gambar || 'https://placehold.co/64x48/e2e8f0/94a3b8?text=No+Img'}"
-                  alt="${p.nama}" class="w-16 h-12 rounded-lg object-cover shrink-0 bg-slate-100"
-                  onerror="this.src='https://placehold.co/64x48/e2e8f0/94a3b8?text=No+Img'" />
-                <div>
-                  <p class="font-bold text-slate-900 text-sm leading-tight">${p.nama}</p>
-                  <p class="text-xs text-slate-400">${p.lokasi}</p>
-                </div>
-              </div>
-            </td>
-            <td class="px-4 py-3">
-              <span class="capitalize text-xs font-semibold px-2 py-1 rounded-full ${p.wilayah === 'lombok' ? 'bg-teal-50 text-teal-700' : 'bg-orange-50 text-orange-700'}">
-                ${p.wilayah === 'sumbawa' ? 'Sumbawa' : 'Lombok'}
-              </span>
-            </td>
-            <td class="px-4 py-3">
-              <span class="capitalize text-xs font-semibold px-2 py-1 rounded-full bg-slate-100 text-slate-600">${p.kategori}</span>
-            </td>
-            <td class="px-4 py-3 font-bold text-slate-900 text-sm">
-              ${p.harga_coret ? `<span class="text-xs text-slate-400 line-through block">${formatRupiah(p.harga_coret)}</span>` : ""}
-              <span class="${p.harga_coret ? "text-red-500" : "text-slate-900"}">${formatRupiah(p.harga)}</span>
-              ${p.harga_coret ? `<span class="ml-1 text-xs bg-red-100 text-red-600 font-black px-1.5 py-0.5 rounded">-${Math.round((1 - p.harga / p.harga_coret) * 100)}%</span>` : ""}
-            </td>
-            <td class="px-4 py-3 text-sm text-slate-600">${p.durasi}</td>
-            <td class="px-4 py-3">
-              <button onclick="toggleAktif(${p.id}, ${p.aktif})"
-                class="text-xs font-bold px-2.5 py-1 rounded-full transition ${p.aktif ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}">
-                ${p.aktif ? '✓ Aktif' : '✗ Nonaktif'}
-              </button>
-            </td>
-            <td class="px-4 py-3">
-              <div class="flex items-center justify-center gap-2">
-                <button onclick="openEdit(${p.id})" class="w-8 h-8 rounded-lg bg-brand-50 text-brand-600 hover:bg-brand-600 hover:text-white flex items-center justify-center transition text-sm" title="Edit">
-                  <i class="fa-solid fa-pen"></i>
-                </button>
-                <button onclick="openHapus(${p.id}, '${p.nama.replace(/'/g,"\\'")}' )" class="w-8 h-8 rounded-lg bg-red-50 text-red-500 hover:bg-red-500 hover:text-white flex items-center justify-center transition text-sm" title="Hapus">
-                  <i class="fa-solid fa-trash"></i>
-                </button>
-              </div>
-            </td>
-          </tr>
-        `).join("");
-      }
-
-      filterSearch.addEventListener("input", renderTable);
-      filterWilayah.addEventListener("change", renderTable);
-      filterKategori.addEventListener("change", renderTable);
-
-      // ── FORMAT RUPIAH ────────────────────────────────────────────────────────
-      function formatRupiah(n) {
-        return "Rp " + Number(n).toLocaleString("id-ID");
-      }
-
-      // ── MODAL FORM ───────────────────────────────────────────────────────────
-      function openModal(title) {
-        modalTitle.textContent = title;
-        modalForm.classList.remove("hidden");
-        modalForm.classList.add("flex");
-      }
-
-      function closeModal() {
-        modalForm.classList.add("hidden");
-        modalForm.classList.remove("flex");
-        paketForm.reset();
-        resetPreview();
-        editingId = null;
-        document.getElementById("form-submit-text").textContent = "Simpan Paket";
-      }
-
-      modalClose.addEventListener("click", closeModal);
-      modalCancel.addEventListener("click", closeModal);
-      modalForm.addEventListener("click", (e) => { if (e.target === modalForm) closeModal(); });
-
-      btnTambah.addEventListener("click", () => {
-        editingId = null;
-        paketForm.reset();
-        resetPreview();
-        document.getElementById("form-id").value = "";
-        document.getElementById("form-aktif").checked = true;
-        document.getElementById("form-submit-text").textContent = "Simpan Paket";
-        openModal("Tambah Paket Wisata");
-      });
-
-      // ── EDIT ─────────────────────────────────────────────────────────────────
-      function openEdit(id) {
-        const p = allPaket.find(x => x.id === id);
-        if (!p) return;
-        editingId = id;
-
-        document.getElementById("form-id").value          = p.id;
-        document.getElementById("form-nama").value        = p.nama;
-        document.getElementById("form-lokasi").value      = p.lokasi;
-        document.getElementById("form-wilayah").value     = p.wilayah;
-        document.getElementById("form-kategori").value    = p.kategori;
-        document.getElementById("form-harga").value       = p.harga;
-        document.getElementById("form-harga-coret").value = p.harga_coret || "";
-        document.getElementById("form-durasi").value      = p.durasi;
-        document.getElementById("form-deskripsi").value   = p.deskripsi;
-        document.getElementById("form-fasilitas").value   = p.fasilitas || "";
-        document.getElementById("form-badge-text").value  = p.badge_text || "";
-        document.getElementById("form-badge-color").value = p.badge_color || "bg-amber-500";
-        document.getElementById("form-rating").value      = p.rating;
-        document.getElementById("form-aktif").checked     = Boolean(p.aktif);
-        document.getElementById("form-gambar-url").value  = p.gambar && !p.gambar.startsWith("/uploads/") ? p.gambar : "";
-
-        if (p.gambar) showPreview(p.gambar);
-        else resetPreview();
-
-        document.getElementById("form-submit-text").textContent = "Update Paket";
-        openModal("Edit Paket Wisata");
-      }
-
-      // ── TOGGLE AKTIF ─────────────────────────────────────────────────────────
-      async function toggleAktif(id, currentAktif) {
-        try {
-          const formData = new FormData();
-          formData.append("aktif", currentAktif ? "0" : "1");
-          await fetch(`${API}/${id}`, { method: "PUT", body: formData });
-          await loadPaket();
-          showToast(currentAktif ? "Paket dinonaktifkan" : "Paket diaktifkan", !currentAktif);
-        } catch (e) {
-          showToast("Gagal mengubah status", false);
-        }
-      }
-
-      // ── SUBMIT FORM ───────────────────────────────────────────────────────────
-      paketForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const submitBtn  = document.getElementById("form-submit-btn");
-        const submitText = document.getElementById("form-submit-text");
-        submitBtn.disabled = true;
-        submitText.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
-
-        const formData = new FormData();
-        formData.append("nama",        document.getElementById("form-nama").value);
-        formData.append("lokasi",      document.getElementById("form-lokasi").value);
-        formData.append("wilayah",     document.getElementById("form-wilayah").value);
-        formData.append("kategori",    document.getElementById("form-kategori").value);
-        formData.append("harga",       document.getElementById("form-harga").value);
-        formData.append("harga_coret", document.getElementById("form-harga-coret").value || "");
-        formData.append("durasi",      document.getElementById("form-durasi").value);
-        formData.append("deskripsi",   document.getElementById("form-deskripsi").value);
-        formData.append("fasilitas",   document.getElementById("form-fasilitas").value);
-        formData.append("badge_text",  document.getElementById("form-badge-text").value);
-        formData.append("badge_color", document.getElementById("form-badge-color").value);
-        formData.append("rating",      document.getElementById("form-rating").value || "4.8");
-        formData.append("aktif",       document.getElementById("form-aktif").checked ? "1" : "0");
-
-        // Gambar: file upload atau URL
-        const fileInput = document.getElementById("form-gambar-file");
-        const gambarUrl = document.getElementById("form-gambar-url").value;
-        if (fileInput.files[0]) {
-          formData.append("gambar", fileInput.files[0]);
-        } else if (gambarUrl) {
-          formData.append("gambar_url", gambarUrl);
-        }
-
-        try {
-          const url    = editingId ? `${API}/${editingId}` : API;
-          const method = editingId ? "PUT" : "POST";
-          const res    = await fetch(url, { method, body: formData });
-          const json   = await res.json();
-
-          if (!res.ok) throw new Error(json.message);
-
-          closeModal();
-          await loadPaket();
-          showToast(editingId ? "Paket berhasil diupdate!" : "Paket berhasil ditambahkan!", true);
-        } catch (err) {
-          showToast("Gagal: " + err.message, false);
-        } finally {
-          submitBtn.disabled = false;
-          submitText.textContent = editingId ? "Update Paket" : "Simpan Paket";
-        }
-      });
-
-      // ── HAPUS ─────────────────────────────────────────────────────────────────
-      function openHapus(id, nama) {
-        hapusId = id;
-        hapusNamaText.textContent = `"${nama}" akan dihapus permanen dari database.`;
-        modalHapus.classList.remove("hidden");
-        modalHapus.classList.add("flex");
-      }
-
-      hapusCancel.addEventListener("click", () => {
-        modalHapus.classList.add("hidden");
-        modalHapus.classList.remove("flex");
-      });
-
-      hapusConfirm.addEventListener("click", async () => {
-        if (!hapusId) return;
-        try {
-          await fetch(`${API}/${hapusId}`, { method: "DELETE" });
-          modalHapus.classList.add("hidden");
-          modalHapus.classList.remove("flex");
-          await loadPaket();
-          showToast("Paket berhasil dihapus", true);
-        } catch (e) {
-          showToast("Gagal menghapus paket", false);
-        }
-        hapusId = null;
-      });
-
-      // ── IMAGE PREVIEW ─────────────────────────────────────────────────────────
-      document.getElementById("form-gambar-file").addEventListener("change", (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-          showPreview(ev.target.result);
-          document.getElementById("form-gambar-url").value = "";
-        };
-        reader.readAsDataURL(file);
-      });
-
-      document.getElementById("form-gambar-url").addEventListener("input", (e) => {
-        const url = e.target.value.trim();
-        if (url) {
-          showPreview(url);
-          document.getElementById("form-gambar-file").value = "";
-        } else {
-          resetPreview();
-        }
-      });
-
-      function showPreview(src) {
-        const img = document.getElementById("img-preview");
-        const placeholder = document.getElementById("img-placeholder");
-        img.src = src;
-        img.classList.remove("hidden");
-        placeholder.classList.add("hidden");
-      }
-
-      function resetPreview() {
-        const img = document.getElementById("img-preview");
-        const placeholder = document.getElementById("img-placeholder");
-        img.src = "";
-        img.classList.add("hidden");
-        placeholder.classList.remove("hidden");
-      }
-
-      // ── TOAST ─────────────────────────────────────────────────────────────────
-      function showToast(msg, success = true) {
-        const toast = document.getElementById("admin-toast");
-        const icon  = document.getElementById("admin-toast-icon");
-        const text  = document.getElementById("admin-toast-msg");
-
-        icon.className = `w-7 h-7 rounded-full flex items-center justify-center font-bold shrink-0 text-sm ${success ? "bg-emerald-500 text-slate-900" : "bg-red-500 text-white"}`;
-        icon.innerHTML = success ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-solid fa-xmark"></i>';
-        text.textContent = msg;
-        toast.classList.remove("hidden");
-
-        setTimeout(() => toast.classList.add("hidden"), 3000);
-      }
-    </script>
   </body>
 </html>
