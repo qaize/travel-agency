@@ -1,45 +1,80 @@
+import "dotenv/config";
 import multer from "multer";
-import path from "path";
-import { fileURLToPath } from "url";
+import { v2 as cloudinary } from "cloudinary";
+import { Readable } from "stream";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const UPLOADS_DIR = path.join(__dirname, "../../public/uploads");
-
-/**
- * Multer storage untuk upload gambar ke disk (public/uploads/).
- * Nama file: paket-<timestamp>.<ext>
- */
-const diskStorage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, UPLOADS_DIR),
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname).toLowerCase();
-    cb(null, `paket-${Date.now()}${ext}`);
-  },
+// ─── Konfigurasi Cloudinary ───────────────────────────────────────────────────
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key:    process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-/** Filter: hanya izinkan file gambar */
-const imageFileFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith("image/")) {
-    cb(null, true);
-  } else {
-    cb(new Error("Hanya file gambar (jpg, png, webp, dll) yang diizinkan"), false);
-  }
-};
+/**
+ * Upload buffer ke Cloudinary dan kembalikan URL.
+ * @param {Buffer} buffer - File buffer dari multer memory storage
+ * @param {string} folder - Folder di Cloudinary (default: 'lomboktrip')
+ * @returns {Promise<string>} URL gambar di Cloudinary
+ */
+export async function uploadToCloudinary(buffer, folder = "lomboktrip") {
+  return new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream(
+      {
+        folder,
+        resource_type: "image",
+        transformation: [{ quality: "auto", fetch_format: "auto" }],
+      },
+      (error, result) => {
+        if (error) reject(error);
+        else resolve(result.secure_url);
+      }
+    );
+    Readable.from(buffer).pipe(uploadStream);
+  });
+}
 
 /**
- * Middleware upload gambar ke disk.
- * Digunakan di route POST/PUT /api/paket.
- * Field name: "gambar"
- * Batas ukuran: 5MB
+ * Hapus gambar dari Cloudinary berdasarkan URL.
+ * @param {string} url - URL Cloudinary gambar yang akan dihapus
  */
-export const uploadGambar = multer({
-  storage: diskStorage,
-  limits: { fileSize: 5 * 1024 * 1024 },
-  fileFilter: imageFileFilter,
-}).single("gambar");
+export async function deleteFromCloudinary(url) {
+  try {
+    // Ekstrak public_id dari URL Cloudinary
+    const parts   = url.split("/");
+    const filename = parts[parts.length - 1].split(".")[0];
+    const folder   = parts[parts.length - 2];
+    const publicId = `${folder}/${filename}`;
+    await cloudinary.uploader.destroy(publicId);
+  } catch (e) {
+    console.warn("Gagal hapus dari Cloudinary:", e.message);
+  }
+}
 
 /**
  * Middleware upload ke memory buffer.
- * Digunakan untuk endpoint Gemini (image, document, audio).
+ * Digunakan untuk semua endpoint upload (paket, hero, gemini).
+ * File disimpan di memory dulu, lalu dikirim ke Cloudinary atau Gemini.
  */
-export const uploadMemory = multer({ storage: multer.memoryStorage() });
+export const uploadMemory = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith("image/") || file.mimetype.startsWith("audio/") || file.mimetype === "application/pdf") {
+      cb(null, true);
+    } else {
+      cb(new Error("Tipe file tidak didukung"), false);
+    }
+  },
+});
+
+/**
+ * Middleware khusus gambar saja (untuk paket & hero upload).
+ */
+export const uploadGambar = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith("image/")) cb(null, true);
+    else cb(new Error("Hanya file gambar yang diizinkan"), false);
+  },
+}).single("gambar");

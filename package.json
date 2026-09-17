@@ -8,11 +8,15 @@
     "start": "node server.js",
     "dev": "node --watch server.js"
   },
+  "engines": {
+    "node": ">=18.x"
+  },
   "keywords": ["travel", "ntb", "lombok", "wisata"],
   "license": "ISC",
   "dependencies": {
     "@google/genai": "^2.23.0",
-    "better-sqlite3": "9.6.0",
+    "@libsql/client": "0.14.0",
+    "cloudinary": "2.5.1",
     "cors": "2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",

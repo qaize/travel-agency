@@ -1,52 +1,42 @@
 import db from "../config/db.js";
 
-/**
- * Repository untuk tabel testimoni.
- * status: 'pending' | 'approved' | 'rejected'
- */
+function toRows(result) {
+  return result.rows.map((row) => Object.fromEntries(
+    result.columns.map((col, i) => [col, row[i]])
+  ));
+}
+function toRow(result) { return toRows(result)[0] || null; }
 
-/** Ambil semua testimoni, bisa filter by status */
-export function findAllTestimoni({ status } = {}) {
-  let query  = "SELECT * FROM testimoni WHERE 1=1";
-  const params = [];
-  if (status) { query += " AND status = ?"; params.push(status); }
-  query += " ORDER BY created_at DESC";
-  return db.prepare(query).all(...params);
+export async function findAllTestimoni({ status } = {}) {
+  let sql = "SELECT * FROM testimoni WHERE 1=1";
+  const args = [];
+  if (status) { sql += " AND status = ?"; args.push(status); }
+  sql += " ORDER BY created_at DESC";
+  return toRows(await db.execute({ sql, args }));
 }
 
-/** Ambil satu testimoni by ID */
-export function findTestimoniById(id) {
-  return db.prepare("SELECT * FROM testimoni WHERE id = ?").get(id);
+export async function findTestimoniById(id) {
+  return toRow(await db.execute({ sql: "SELECT * FROM testimoni WHERE id = ?", args: [id] }));
 }
 
-/** Tambah testimoni baru (status default: pending) */
-export function createTestimoni({ nama, asal, rating, pesan, foto, paket }) {
-  const result = db.prepare(`
-    INSERT INTO testimoni (nama, asal, rating, pesan, foto, paket, status)
-    VALUES (?, ?, ?, ?, ?, ?, 'pending')
-  `).run(
-    nama,
-    asal    || null,
-    Number(rating) || 5,
-    pesan,
-    foto    || null,
-    paket   || null,
-  );
-  return findTestimoniById(result.lastInsertRowid);
+export async function createTestimoni({ nama, asal, rating, pesan, foto, paket }) {
+  const result = await db.execute({
+    sql: "INSERT INTO testimoni (nama,asal,rating,pesan,foto,paket,status) VALUES (?,?,?,?,?,?,'pending')",
+    args: [nama, asal || null, Number(rating) || 5, pesan, foto || null, paket || null],
+  });
+  return findTestimoniById(Number(result.lastInsertRowid));
 }
 
-/** Update status testimoni: approved / rejected */
-export function updateStatusTestimoni(id, status) {
-  const existing = findTestimoniById(id);
+export async function updateStatusTestimoni(id, status) {
+  const existing = await findTestimoniById(id);
   if (!existing) return null;
-  db.prepare("UPDATE testimoni SET status = ? WHERE id = ?").run(status, id);
+  await db.execute({ sql: "UPDATE testimoni SET status = ? WHERE id = ?", args: [status, id] });
   return findTestimoniById(id);
 }
 
-/** Hapus testimoni */
-export function deleteTestimoni(id) {
-  const existing = findTestimoniById(id);
+export async function deleteTestimoni(id) {
+  const existing = await findTestimoniById(id);
   if (!existing) return null;
-  db.prepare("DELETE FROM testimoni WHERE id = ?").run(id);
+  await db.execute({ sql: "DELETE FROM testimoni WHERE id = ?", args: [id] });
   return existing;
 }

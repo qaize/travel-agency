@@ -3,25 +3,20 @@ import { getAllSettings, updateSettings } from "../repositories/settingsReposito
 
 const router = Router();
 
-// ─── GET /api/settings ────────────────────────────────────────────────────────
-// Publik — dipakai frontend untuk render stats counter
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    res.json({ data: getAllSettings() });
+    res.json({ data: await getAllSettings() });
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
 });
 
-// ─── PUT /api/settings ────────────────────────────────────────────────────────
-// Admin — update satu atau banyak setting sekaligus
-// Body: { "stat_1_nilai": "10.000+", "stat_1_label": "Wisatawan", ... }
-router.put("/", (req, res) => {
+router.put("/", async (req, res) => {
   try {
     if (!req.body || Object.keys(req.body).length === 0) {
       return res.status(400).json({ message: "Tidak ada data yang dikirim" });
     }
-    const updated = updateSettings(req.body);
+    const updated = await updateSettings(req.body);
     res.json({ message: "Settings berhasil disimpan", data: updated });
   } catch (e) {
     res.status(500).json({ message: e.message });

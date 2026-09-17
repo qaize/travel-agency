@@ -1,78 +1,63 @@
 import db from "../config/db.js";
 
-/**
- * Repository untuk hero_images.
- * Semua akses database hero slideshow hanya melalui file ini.
- */
+function toRows(result) {
+  return result.rows.map((row) => Object.fromEntries(
+    result.columns.map((col, i) => [col, row[i]])
+  ));
+}
+function toRow(result) { return toRows(result)[0] || null; }
 
-/** Ambil semua hero images aktif, diurutkan by urutan */
-export function findAllHero({ aktif } = {}) {
-  let query = "SELECT * FROM hero_images WHERE 1=1";
-  const params = [];
-  if (aktif !== undefined) { query += " AND aktif = ?"; params.push(Number(aktif)); }
-  query += " ORDER BY urutan ASC, id ASC";
-  return db.prepare(query).all(...params);
+export async function findAllHero({ aktif } = {}) {
+  let sql = "SELECT * FROM hero_images WHERE 1=1";
+  const args = [];
+  if (aktif !== undefined) { sql += " AND aktif = ?"; args.push(Number(aktif)); }
+  sql += " ORDER BY urutan ASC, id ASC";
+  return toRows(await db.execute({ sql, args }));
 }
 
-/** Ambil satu hero image by ID */
-export function findHeroById(id) {
-  return db.prepare("SELECT * FROM hero_images WHERE id = ?").get(id);
+export async function findHeroById(id) {
+  return toRow(await db.execute({ sql: "SELECT * FROM hero_images WHERE id = ?", args: [id] }));
 }
 
-/** Tambah hero image baru */
-export function createHero({ gambar, judul, subjudul, urutan, aktif = 1 }) {
-  // Kalau urutan tidak diisi, taruh di paling akhir
+export async function createHero({ gambar, judul, subjudul, urutan, aktif = 1 }) {
   if (urutan === undefined || urutan === null || urutan === "") {
-    const last = db.prepare("SELECT MAX(urutan) as max FROM hero_images").get();
-    urutan = (last.max || 0) + 1;
+    const result = await db.execute("SELECT MAX(urutan) as max FROM hero_images");
+    const max = result.rows[0]?.[0] || 0;
+    urutan = Number(max) + 1;
   }
-
-  const result = db.prepare(`
-    INSERT INTO hero_images (gambar, judul, subjudul, urutan, aktif)
-    VALUES (?, ?, ?, ?, ?)
-  `).run(gambar, judul || null, subjudul || null, Number(urutan), Number(aktif));
-
-  return findHeroById(result.lastInsertRowid);
+  const result = await db.execute({
+    sql: "INSERT INTO hero_images (gambar,judul,subjudul,urutan,aktif) VALUES (?,?,?,?,?)",
+    args: [gambar, judul || null, subjudul || null, Number(urutan), Number(aktif)],
+  });
+  return findHeroById(Number(result.lastInsertRowid));
 }
 
-/** Update hero image */
-export function updateHero(id, data) {
-  const existing = findHeroById(id);
+export async function updateHero(id, data) {
+  const existing = await findHeroById(id);
   if (!existing) return null;
-
-  db.prepare(`
-    UPDATE hero_images SET
-      gambar   = ?,
-      judul    = ?,
-      subjudul = ?,
-      urutan   = ?,
-      aktif    = ?
-    WHERE id = ?
-  `).run(
-    data.gambar   ?? existing.gambar,
-    data.judul    ?? existing.judul,
-    data.subjudul ?? existing.subjudul,
-    Number(data.urutan ?? existing.urutan),
-    Number(data.aktif  !== undefined ? data.aktif : existing.aktif),
-    id,
-  );
-
+  await db.execute({
+    sql: "UPDATE hero_images SET gambar=?,judul=?,subjudul=?,urutan=?,aktif=? WHERE id=?",
+    args: [
+      data.gambar   ?? existing.gambar,
+      data.judul    ?? existing.judul,
+      data.subjudul ?? existing.subjudul,
+      Number(data.urutan ?? existing.urutan),
+      Number(data.aktif !== undefined ? data.aktif : existing.aktif),
+      id,
+    ],
+  });
   return findHeroById(id);
 }
 
-/** Hapus hero image */
-export function deleteHero(id) {
-  const existing = findHeroById(id);
+export async function deleteHero(id) {
+  const existing = await findHeroById(id);
   if (!existing) return null;
-  db.prepare("DELETE FROM hero_images WHERE id = ?").run(id);
+  await db.execute({ sql: "DELETE FROM hero_images WHERE id = ?", args: [id] });
   return existing;
 }
 
-/** Update urutan semua hero sekaligus (untuk drag & drop reorder) */
-export function reorderHero(orderedIds) {
-  const update = db.prepare("UPDATE hero_images SET urutan = ? WHERE id = ?");
-  const updateMany = db.transaction((ids) => {
-    ids.forEach((id, index) => update.run(index + 1, id));
-  });
-  updateMany(orderedIds);
+export async function reorderHero(orderedIds) {
+  for (let i = 0; i < orderedIds.length; i++) {
+    await db.execute({ sql: "UPDATE hero_images SET urutan = ? WHERE id = ?", args: [i + 1, orderedIds[i]] });
+  }
 }
