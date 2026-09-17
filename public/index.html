@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LombokTrip - Agen Wisata Nusa Tenggara Barat</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js"></script>
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white"
+  >
+    <!-- NAVBAR -->
+    <header
+      id="navbar"
+      class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          <!-- Logo -->
+          <a href="#" class="flex items-center space-x-3 group">
+            <div
+              class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-teal-400 flex items-center justify-center text-white shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform"
+            >
+              <i class="fa-solid font-bold fa-umbrella-beach text-lg"></i>
+            </div>
+            <div>
+              <span class="text-2xl font-black tracking-tight text-slate-900"
+                >Lombok<span class="text-brand-600">Trip</span></span
+              >
+              <span
+                class="block text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1"
+                >Wisata NTB</span
+              >
+            </div>
+          </a>
+
+          <!-- Desktop Nav -->
+          <nav
+            class="hidden md:flex items-center space-x-8 font-medium text-slate-600 text-sm"
+          >
+            <a
+              href="#beranda"
+              class="text-brand-600 font-semibold hover:text-brand-700 transition"
+              >Beranda</a
+            >
+            <a href="#tujuan" class="hover:text-brand-600 transition"
+              >Destinasi NTB</a
+            >
+            <a href="#keunggulan" class="hover:text-brand-600 transition"
+              >Keunggulan</a
+            >
+            <a href="#testimonial" class="hover:text-brand-600 transition"
+              >Testimonial</a
+            >
+            <a href="#kontak" class="hover:text-brand-600 transition"
+              >Bantuan</a
+            >
+          </nav>
+
+          <!-- Action Button -->
+          <div class="hidden md:flex items-center space-x-4">
+            <a
+              href="https://wa.me/6285177430585"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-xs font-semibold text-slate-600 hover:text-brand-600 flex items-center gap-1"
+            >
+              <i class="fa-brands fa-whatsapp text-brand-600"></i> +62 851-7743-0585
+            </a>
+            <button
+              data-booking-destination="Destinasi NTB Pilihan"
+              class="bg-brand-600 hover:bg-brand-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-md shadow-brand-600/20 hover:shadow-lg hover:shadow-brand-600/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+            >
+              Cari Paket Wisata
+            </button>
+          </div>
+
+          <!-- Mobile Hamburger Button -->
+          <div class="md:hidden flex items-center">
+            <button
+              id="mobile-menu-btn"
+              class="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none"
+            >
+              <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Drawer Menu -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-6 space-y-3 transition-all duration-300"
+      >
+        <a
+          href="#beranda"
+          class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-brand-600 bg-brand-50"
+          >Beranda</a
+        >
+        <a
+          href="#tujuan"
+          class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50"
+          >Destinasi NTB</a
+        >
+        <a
+          href="#keunggulan"
+          class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50"
+          >Keunggulan</a
+        >
+        <a
+          href="#testimonial"
+          class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50"
+          >Testimonial</a
+        >
+        <a
+          href="#kontak"
+          class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50"
+          >Hubungi Kami</a
+        >
+        <div class="pt-2 border-t border-slate-100 flex flex-col gap-2">
+          <button
+            data-booking-destination="Pemesanan Wisata NTB"
+            class="w-full bg-brand-600 text-white py-3 rounded-xl font-semibold shadow"
+          >
+            Pesan Wisata NTB Sekarang
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section
+      id="beranda"
+      class="relative min-h-screen pt-28 pb-16 flex items-center justify-center bg-slate-900 overflow-hidden"
+    >
+      <!-- Slideshow Background -->
+      <div id="hero-slideshow" class="absolute inset-0 z-0">
+        <!-- Slide dirender oleh JS dari API -->
+        <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-100">
+          <img
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80"
+            alt="Hero NTB"
+            class="w-full h-full object-cover object-center"
+          />
+        </div>
+        <div class="absolute inset-0 hero-gradient"></div>
+      </div>
+
+      <!-- Arrow Navigation -->
+      <button
+        id="hero-prev"
+        class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white rounded-full flex items-center justify-center transition hidden"
+      >
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button
+        id="hero-next"
+        class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white rounded-full flex items-center justify-center transition hidden"
+      >
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <!-- Dot Indicators -->
+      <div id="hero-dots" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2 hidden"></div>
+
+      <div
+        class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-8"
+      >
+        <div class="text-center max-w-3xl mx-auto space-y-6">
+          <!-- Badge -->
+          <div
+            class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 text-teal-300 text-xs sm:text-sm font-medium"
+          >
+            <span class="flex h-2 w-2 rounded-full bg-teal-400 animate-ping"></span>
+            <span>Promo Wisata NTB - Diskon Hingga 35% Musim Liburan Ini!</span>
+          </div>
+
+          <!-- Main Heading — diupdate JS sesuai slide aktif -->
+          <h1
+            id="hero-judul"
+            class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight font-serif transition-opacity duration-500"
+          >
+            Jelajahi Surga Tersembunyi
+            <span class="bg-gradient-to-r from-teal-300 via-emerald-300 to-amber-300 bg-clip-text text-transparent"
+              >Nusa Tenggara Barat</span
+            >
+          </h1>
+
+          <!-- Subheading — diupdate JS sesuai slide aktif -->
+          <p
+            id="hero-subjudul"
+            class="text-slate-200 text-base sm:text-lg lg:text-xl font-normal leading-relaxed max-w-2xl mx-auto transition-opacity duration-500"
+          >
+            Nikmati keindahan pantai Gili, keagungan Gunung Rinjani, keeksotisan
+            Sumbawa, dan kehangatan budaya Sasak bersama pemandu lokal terbaik NTB.
+          </p>
+        </div>
+
+        <!-- SEARCH WIDGET CARD -->
+        <div
+          class="mt-10 max-w-5xl mx-auto glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl border border-white/40"
+        >
+          <form
+            id="search-form"
+            class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center"
+          >
+            <!-- Destinasi Input -->
+            <div
+              class="p-3 bg-white/80 rounded-xl border border-slate-200 hover:border-brand-500 transition"
+            >
+              <label
+                class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1"
+              >
+                <i class="fa-solid fa-location-dot text-brand-600 mr-1"></i>
+                Destinasi NTB
+              </label>
+              <select
+                id="search-location"
+                class="w-full bg-transparent text-slate-800 font-semibold focus:outline-none text-sm"
+              >
+                <option value="">Pilih Tujuan Wisata NTB...</option>
+              </select>
+            </div>
+
+            <!-- Button Cari -->
+            <div class="h-full flex items-end">
+              <button
+                type="submit"
+                class="w-full h-[52px] bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-lg shadow-brand-600/30 hover:shadow-brand-600/50 flex items-center justify-center space-x-2 transition transform active:scale-95"
+              >
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>Cari Paket Wisata</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Stats Counter -->
+        <!-- Stats Counter — diisi JS dari API /api/settings -->
+        <div
+          id="stats-counter"
+          class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-white text-center"
+        >
+          <!-- Skeleton loading -->
+          <div class="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 animate-pulse">
+            <div class="h-8 bg-white/10 rounded mb-2"></div>
+            <div class="h-4 bg-white/10 rounded w-3/4 mx-auto"></div>
+          </div>
+          <div class="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 animate-pulse">
+            <div class="h-8 bg-white/10 rounded mb-2"></div>
+            <div class="h-4 bg-white/10 rounded w-3/4 mx-auto"></div>
+          </div>
+          <div class="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 animate-pulse">
+            <div class="h-8 bg-white/10 rounded mb-2"></div>
+            <div class="h-4 bg-white/10 rounded w-3/4 mx-auto"></div>
+          </div>
+          <div class="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 animate-pulse">
+            <div class="h-8 bg-white/10 rounded mb-2"></div>
+            <div class="h-4 bg-white/10 rounded w-3/4 mx-auto"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESTINATIONS SECTION -->
+    <section id="tujuan" class="py-20 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Title Header -->
+        <div
+          class="flex flex-col md:flex-row md:items-end justify-between mb-12"
+        >
+          <div class="max-w-2xl">
+            <span
+              class="text-brand-600 font-bold text-xs uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full border border-brand-100"
+            >
+              Destinasi Unggulan NTB
+            </span>
+            <h2
+              class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 font-serif"
+            >
+              Eksplor Keajaiban Nusa Tenggara Barat
+            </h2>
+            <p class="text-slate-600 mt-2 text-sm sm:text-base">
+              Dari pantai biru Gili hingga puncak Rinjani, temukan pengalaman wisata
+              terbaik NTB bersama pemandu lokal berpengalaman.
+            </p>
+          </div>
+
+          <!-- Category Filters -->
+          <div class="mt-6 md:mt-0 flex flex-wrap gap-2" id="filter-container">
+            <button
+              data-filter="semua"
+              class="filter-btn active-tab px-4 py-2 text-xs sm:text-sm font-semibold rounded-full bg-brand-600 text-white shadow-sm transition"
+            >
+              Semua
+            </button>
+            <button
+              data-filter="lombok"
+              class="filter-btn px-4 py-2 text-xs sm:text-sm font-semibold rounded-full bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition"
+            >
+              Lombok
+            </button>
+            <button
+              data-filter="sumbawa"
+              class="filter-btn px-4 py-2 text-xs sm:text-sm font-semibold rounded-full bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition"
+            >
+              Sumbawa
+            </button>
+            <button
+              data-filter="pantai"
+              class="filter-btn px-4 py-2 text-xs sm:text-sm font-semibold rounded-full bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition"
+            >
+              Pantai
+            </button>
+            <button
+              data-filter="petualangan"
+              class="filter-btn px-4 py-2 text-xs sm:text-sm font-semibold rounded-full bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition"
+            >
+              Petualangan
+            </button>
+          </div>
+        </div>
+
+        <!-- Destinations Cards Grid -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          id="destination-grid"
+        >
+          <!-- Kartu dirender dinamis dari API oleh script.js -->
+          <div class="col-span-full text-center py-16 text-slate-400">
+            <i class="fa-solid fa-spinner fa-spin text-3xl mb-3 block"></i>
+            <p class="text-sm">Memuat paket wisata...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES / WHY CHOOSE US -->
+    <section id="keunggulan" class="py-20 bg-white relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span
+            class="text-brand-600 font-bold text-xs uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full border border-brand-100"
+          >
+            Keunggulan LombokTrip
+          </span>
+          <h2
+            class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 font-serif"
+          >
+            Mengapa Pilih Kami untuk Wisata NTB?
+          </h2>
+          <p class="text-slate-600 mt-2 text-sm sm:text-base">
+            Kami adalah warga lokal NTB yang memahami setiap sudut destinasi.
+            Komitmen kami: liburan berkesan, aman, dan bernilai.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Feature 1 -->
+          <div
+            class="p-8 rounded-2xl bg-slate-50 hover:bg-brand-50/50 border border-slate-100 hover:border-brand-200 transition duration-300 group"
+          >
+            <div
+              class="w-14 h-14 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition"
+            >
+              <i class="fa-solid fa-map-location-dot"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">
+              Pemandu Lokal Asli NTB
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Guide kami adalah putra-putri daerah NTB yang hafal setiap
+              destinasi, budaya Sasak, dan bahasa lokal.
+            </p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div
+            class="p-8 rounded-2xl bg-slate-50 hover:bg-brand-50/50 border border-slate-100 hover:border-brand-200 transition duration-300 group"
+          >
+            <div
+              class="w-14 h-14 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition"
+            >
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">
+              Asuransi & Keselamatan
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Setiap perjalanan kami sertakan perlindungan asuransi perjalanan
+              dan kesehatan komprehensif untuk ketenangan Anda.
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div
+            class="p-8 rounded-2xl bg-slate-50 hover:bg-brand-50/50 border border-slate-100 hover:border-brand-200 transition duration-300 group"
+          >
+            <div
+              class="w-14 h-14 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition"
+            >
+              <i class="fa-solid fa-tags"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">
+              Harga Transparan & Hemat
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Tanpa biaya tersembunyi. Semua tiket masuk, transportasi, dan
+              konsumsi sudah tertera dengan jelas di paket.
+            </p>
+          </div>
+
+          <!-- Feature 4 -->
+          <div
+            class="p-8 rounded-2xl bg-slate-50 hover:bg-brand-50/50 border border-slate-100 hover:border-brand-200 transition duration-300 group"
+          >
+            <div
+              class="w-14 h-14 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition"
+            >
+              <i class="fa-solid fa-headset"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">
+              CS Siap 24/7
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Tim konsultan wisata kami siap melayani via WhatsApp, telepon, dan
+              chat kapan pun Anda butuhkan.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section id="testimonial" class="py-20 bg-slate-900 text-white relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-teal-400 font-bold text-xs uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/20">
+            Testimonial
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold mt-3 font-serif">
+            Cerita Wisatawan yang Sudah Ke NTB
+          </h2>
+          <p class="text-slate-400 mt-2 text-sm sm:text-base">
+            Pengalaman nyata dari wisatawan yang telah menjelajahi keindahan
+            Nusa Tenggara Barat bersama LombokTrip.
+          </p>
+        </div>
+
+        <!-- Testimonials Grid — diisi JS dari API -->
+        <div id="testimoni-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="col-span-full text-center py-12 text-slate-500">
+            <i class="fa-solid fa-spinner fa-spin text-2xl mb-2 block"></i>
+            <p class="text-sm">Memuat testimoni...</p>
+          </div>
+        </div>
+
+        <!-- Tombol lihat semua -->
+        <div id="testi-load-more" class="text-center mt-8 hidden">
+          <button id="btn-load-more-testi"
+            class="px-6 py-2.5 rounded-full border border-white/20 text-slate-300 hover:bg-white/10 text-sm font-semibold transition">
+            Lihat Semua Testimoni
+          </button>
+        </div>
+
+        <!-- ── FORM PUBLIK SUBMIT TESTIMONI ── -->
+        <div class="mt-20 max-w-2xl mx-auto">
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-extrabold font-serif">Punya Pengalaman Bersama Kami?</h3>
+            <p class="text-slate-400 mt-2 text-sm">Bagikan cerita perjalananmu — akan kami tampilkan setelah diverifikasi.</p>
+          </div>
+
+          <form id="form-testimoni" class="bg-slate-800/60 backdrop-blur-sm rounded-2xl border border-slate-700 p-6 sm:p-8 space-y-4">
+
+            <!-- Nama & Asal -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Nama Lengkap <span class="text-red-400">*</span></label>
+                <input type="text" id="testi-nama" required placeholder="Contoh: Budi Santoso"
+                  class="w-full px-3 py-2.5 rounded-xl bg-slate-700/60 border border-slate-600 text-white placeholder:text-slate-500 text-sm focus:border-brand-500 focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Asal Kota</label>
+                <input type="text" id="testi-asal" placeholder="Contoh: Jakarta"
+                  class="w-full px-3 py-2.5 rounded-xl bg-slate-700/60 border border-slate-600 text-white placeholder:text-slate-500 text-sm focus:border-brand-500 focus:outline-none" />
+              </div>
+            </div>
+
+            <!-- Paket & Rating -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Paket yang Diikuti</label>
+                <input type="text" id="testi-paket" placeholder="Contoh: Gili Trawangan 3D2N"
+                  class="w-full px-3 py-2.5 rounded-xl bg-slate-700/60 border border-slate-600 text-white placeholder:text-slate-500 text-sm focus:border-brand-500 focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Rating</label>
+                <div id="testi-rating-stars" class="flex gap-2" data-rating="5">
+                  <i data-star="1" class="testi-star fa-solid fa-star text-amber-400 text-xl cursor-pointer hover:scale-110 transition"></i>
+                  <i data-star="2" class="testi-star fa-solid fa-star text-amber-400 text-xl cursor-pointer hover:scale-110 transition"></i>
+                  <i data-star="3" class="testi-star fa-solid fa-star text-amber-400 text-xl cursor-pointer hover:scale-110 transition"></i>
+                  <i data-star="4" class="testi-star fa-solid fa-star text-amber-400 text-xl cursor-pointer hover:scale-110 transition"></i>
+                  <i data-star="5" class="testi-star fa-solid fa-star text-amber-400 text-xl cursor-pointer hover:scale-110 transition"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pesan -->
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Ceritamu <span class="text-red-400">*</span></label>
+              <textarea id="testi-pesan" required rows="4"
+                placeholder="Ceritakan pengalamanmu berwisata bersama LombokTrip..."
+                class="w-full px-3 py-2.5 rounded-xl bg-slate-700/60 border border-slate-600 text-white placeholder:text-slate-500 text-sm focus:border-brand-500 focus:outline-none resize-none"></textarea>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" id="testi-submit-btn"
+              class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-brand-600/20">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span id="testi-submit-text">Kirim Testimoni</span>
+            </button>
+            <p class="text-xs text-slate-500 text-center">Testimoni akan tampil setelah diverifikasi oleh tim kami.</p>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION (CTA) SECTION -->
+    <section class="py-16 bg-slate-50 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="relative bg-gradient-to-r from-brand-700 via-brand-600 to-teal-600 rounded-3xl p-8 sm:p-12 lg:p-16 overflow-hidden shadow-2xl text-white"
+        >
+          <!-- Decorative Circles -->
+          <div
+            class="absolute -right-12 -bottom-12 w-64 h-64 rounded-full bg-white/10 blur-2xl pointer-events-none"
+          ></div>
+          <div
+            class="absolute -left-12 -top-12 w-64 h-64 rounded-full bg-white/10 blur-2xl pointer-events-none"
+          ></div>
+
+          <div
+            class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+          >
+            <div class="lg:col-span-7 space-y-4">
+              <span
+                class="bg-amber-400 text-slate-900 text-xs font-black uppercase px-3 py-1 rounded-full"
+              >
+                Penawaran Terbatas
+              </span>
+              <h2
+                class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif leading-tight"
+              >
+                Siap Jelajahi Keindahan Nusa Tenggara Barat?
+              </h2>
+              <p class="text-teal-100 text-sm sm:text-base max-w-xl">
+                Daftarkan email Anda sekarang dan dapatkan voucher
+                <span class="text-amber-300 font-bold">Rp 300.000</span> untuk
+                pemesanan pertama wisata NTB bersama kami!
+              </p>
+            </div>
+
+            <div class="lg:col-span-5">
+              <form id="newsletter-form" class="space-y-3">
+                <div class="flex flex-col sm:flex-row gap-2">
+                  <input
+                    type="email"
+                    required
+                    placeholder="Masukkan email aktif Anda..."
+                    class="w-full px-4 py-3.5 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-400 text-sm font-medium"
+                  />
+                  <button
+                    type="submit"
+                    class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-6 py-3.5 rounded-xl transition shadow-lg shrink-0 text-sm flex items-center justify-center gap-2"
+                  >
+                    <span>Klaim Voucher</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                </div>
+                <p class="text-xs text-teal-100 flex items-center gap-1.5">
+                  <i class="fa-solid fa-lock text-xs"></i> Privasi Anda
+                  terjamin. Boleh unsubscribe kapan saja.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer
+      id="kontak"
+      class="bg-slate-950 text-slate-400 pt-16 pb-8 border-t border-slate-900"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12"
+        >
+          <!-- Col 1: Brand Info -->
+          <div class="lg:col-span-2 space-y-4">
+            <a href="#" class="flex items-center space-x-3">
+              <div
+                class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-teal-400 flex items-center justify-center text-white font-bold text-lg"
+              >
+                <i class="fa-solid fa-umbrella-beach"></i>
+              </div>
+              <span class="text-2xl font-black text-white"
+                >Lombok<span class="text-brand-500">Trip</span></span
+              >
+            </a>
+            <p class="text-sm leading-relaxed text-slate-400 max-w-sm">
+              Agen perjalanan wisata lokal terpercaya di Nusa Tenggara Barat.
+              Spesialis paket wisata Lombok, Sumbawa, Gili, dan destinasi
+              eksotis NTB lainnya sejak 2018.
+            </p>
+            <div class="flex space-x-3 pt-2">
+              <a
+                href="#"
+                class="w-9 h-9 rounded-lg bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center transition text-slate-400"
+              >
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a
+                href="#"
+                class="w-9 h-9 rounded-lg bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center transition text-slate-400"
+              >
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a
+                href="#"
+                class="w-9 h-9 rounded-lg bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center transition text-slate-400"
+              >
+                <i class="fa-brands fa-tiktok"></i>
+              </a>
+              <a
+                href="#"
+                class="w-9 h-9 rounded-lg bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center transition text-slate-400"
+              >
+                <i class="fa-brands fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Col 2: Navigasi -->
+          <div>
+            <h4
+              class="text-white font-bold text-sm uppercase tracking-wider mb-4"
+            >
+              Navigasi
+            </h4>
+            <ul class="space-y-2.5 text-sm">
+              <li>
+                <a href="#beranda" class="hover:text-white transition"
+                  >Beranda</a
+                >
+              </li>
+              <li>
+                <a href="#tujuan" class="hover:text-white transition"
+                  >Destinasi NTB</a
+                >
+              </li>
+              <li>
+                <a href="#keunggulan" class="hover:text-white transition"
+                  >Layanan Kami</a
+                >
+              </li>
+              <li>
+                <a href="#testimonial" class="hover:text-white transition"
+                  >Ulasan Wisatawan</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition"
+                  >Syarat & Ketentuan</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Destinasi Populer NTB -->
+          <div>
+            <h4
+              class="text-white font-bold text-sm uppercase tracking-wider mb-4"
+            >
+              Destinasi NTB
+            </h4>
+            <ul class="space-y-2.5 text-sm">
+              <li>
+                <a href="#" class="hover:text-white transition">Gili Trawangan</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition"
+                  >Pendakian Rinjani</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition"
+                  >Mandalika & Pantai Kuta</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition"
+                  >Pulau Moyo Sumbawa</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition"
+                  >Tambora Bima</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Kontak -->
+          <div>
+            <h4
+              class="text-white font-bold text-sm uppercase tracking-wider mb-4"
+            >
+              Kantor Kami
+            </h4>
+            <ul class="space-y-3 text-sm">
+              <li class="flex items-start gap-2.5">
+                <i class="fa-solid fa-location-dot text-brand-500 mt-1"></i>
+                <span>Jl. Pejanggik No. 45, Mataram, Nusa Tenggara Barat 83126</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <i class="fa-solid fa-envelope text-brand-500"></i>
+                <span>halo@lomboktrip.co.id</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <i class="fa-brands fa-whatsapp text-brand-500"></i>
+                <a href="https://wa.me/6285177430585" target="_blank" rel="noopener noreferrer"
+                  class="hover:text-white transition">+62 851-7743-0585</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Copyright & Credit -->
+        <div
+          class="pt-8 border-t border-slate-900 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-4"
+        >
+          <p>
+            &copy; 2026 LombokTrip Wisata NTB. Seluruh Hak Cipta Dilindungi. Berbasis di Mataram, NTB.
+          </p>
+          <div class="flex items-center space-x-4">
+            <span class="text-slate-600">Metode Pembayaran Resmi:</span>
+            <i class="fa-brands fa-cc-visa text-lg text-slate-400"></i>
+            <i class="fa-brands fa-cc-mastercard text-lg text-slate-400"></i>
+            <i class="fa-solid fa-building-columns text-lg text-slate-400"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- BOOKING MODAL -->
+    <div
+      id="booking-modal"
+      class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm transition-opacity"
+    >
+      <div
+        class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative animate-in fade-in zoom-in duration-200"
+      >
+        <!-- Close button -->
+        <button
+          data-close-modal
+          class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center transition"
+        >
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+
+        <!-- Modal Header -->
+        <div class="mb-6">
+          <span
+            class="text-xs font-bold text-brand-600 bg-brand-50 px-3 py-1 rounded-full border border-brand-100"
+            >Pemesanan Wisata NTB</span
+          >
+          <h3
+            id="modal-destination-title"
+            class="text-2xl font-bold text-slate-900 mt-2"
+          >
+            Reservasi Paket Wisata NTB
+          </h3>
+          <p class="text-xs text-slate-500 mt-1">
+            Isi formulir singkat di bawah ini. Tim konsultan kami akan
+            menghubungi Anda via WhatsApp dalam 1x24 jam.
+          </p>
+        </div>
+
+        <!-- Form -->
+        <form id="booking-form" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1"
+              >Nama Lengkap</label
+            >
+            <input
+              type="text"
+              required
+              placeholder="Contoh: Ahmad Fauzi"
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm font-medium"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label
+                class="block text-xs font-bold uppercase text-slate-600 mb-1"
+                >Nomor WhatsApp</label
+              >
+              <input
+                type="tel"
+                required
+                placeholder="0812xxxxxxx"
+                class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm font-medium"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-xs font-bold uppercase text-slate-600 mb-1"
+                >Jumlah Peserta</label
+              >
+              <input
+                type="number"
+                min="1"
+                value="2"
+                required
+                class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm font-medium"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1"
+              >Perkiraan Bulan Perjalanan</label
+            >
+            <select
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm font-medium"
+            >
+              <option>Bulan Ini</option>
+              <option>Bulan Depan</option>
+              <option>Liburan Akhir Tahun</option>
+              <option>Jadwal Fleksibel</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1"
+              >Catatan Tambahan (Opsional)</label
+            >
+            <textarea
+              rows="2"
+              placeholder="Misal: Ingin snorkeling, paket keluarga, vegetarian, dll..."
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm font-medium"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-brand-600/30 transition text-sm flex items-center justify-center gap-2"
+          >
+            <i class="fa-brands fa-whatsapp text-lg"></i>
+            <span>Kirim Permintaan via WhatsApp</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div
+      id="toast"
+      class="fixed bottom-6 right-6 z-50 hidden bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-slate-700 flex items-center space-x-3 transition-all duration-300 transform translate-y-4"
+    >
+      <div
+        class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-slate-900 font-bold shrink-0"
+      >
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <span id="toast-message" class="text-sm font-medium"
+        >Pesan berhasil dikirim!</span
+      >
+    </div>
+
+    <!-- ===== CHATBOT ===== -->
+
+    <!-- Floating Chat Button -->
+    <button
+      id="chat-toggle-btn"
+      class="fixed bottom-6 left-6 z-50 w-14 h-14 bg-brand-600 hover:bg-brand-700 text-white rounded-full shadow-xl shadow-brand-600/40 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95"
+      title="Tanya Asisten Wisata NTB"
+    >
+      <i class="fa-solid fa-comments text-xl" id="chat-btn-icon"></i>
+      <!-- Unread badge -->
+      <span
+        id="chat-badge"
+        class="absolute -top-1 -right-1 w-5 h-5 bg-amber-400 text-slate-900 text-[10px] font-black rounded-full flex items-center justify-center"
+      >1</span>
+    </button>
+
+    <!-- Chat Window -->
+    <div
+      id="chat-window"
+      class="fixed bottom-24 left-6 z-50 hidden w-[350px] sm:w-[380px] bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden transition-all duration-300"
+      style="max-height: 520px;"
+    >
+      <!-- Chat Header -->
+      <div class="bg-gradient-to-r from-brand-700 to-teal-600 px-4 py-3 flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white text-lg">
+            <i class="fa-solid fa-mountain-sun"></i>
+          </div>
+          <div>
+            <p class="text-white font-bold text-sm leading-tight">Rinjani</p>
+            <p class="text-teal-200 text-xs">Asisten Wisata NTB · LombokTrip</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <!-- Clear history -->
+          <button
+            id="chat-clear-btn"
+            class="text-white/60 hover:text-white transition text-xs px-2 py-1 rounded-lg hover:bg-white/10"
+            title="Hapus riwayat chat"
+          >
+            <i class="fa-solid fa-rotate-left"></i>
+          </button>
+          <!-- Close -->
+          <button
+            id="chat-close-btn"
+            class="text-white/60 hover:text-white transition w-7 h-7 flex items-center justify-center rounded-lg hover:bg-white/10"
+          >
+            <i class="fa-solid fa-xmark text-base"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages Area -->
+      <div
+        id="chat-messages"
+        class="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50"
+        style="min-height: 280px; max-height: 340px;"
+      >
+        <!-- Pesan selamat datang ditambahkan via JS -->
+      </div>
+
+      <!-- Typing Indicator (hidden by default) -->
+      <div id="chat-typing" class="hidden px-4 pb-2">
+        <div class="flex items-center gap-2 text-slate-400 text-xs">
+          <div class="flex gap-1">
+            <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay:0ms"></span>
+            <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay:150ms"></span>
+            <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay:300ms"></span>
+          </div>
+          <span>Rinjani sedang mengetik...</span>
+        </div>
+      </div>
+
+      <!-- Quick Reply Suggestions -->
+      <div id="chat-suggestions" class="px-4 pb-2 flex flex-wrap gap-1.5 shrink-0">
+        <button data-suggestion="Rekomendasikan destinasi wisata terbaik di Lombok" class="chat-suggestion-btn text-[11px] bg-brand-50 text-brand-700 border border-brand-200 px-2.5 py-1 rounded-full hover:bg-brand-100 transition">🏝️ Destinasi Lombok</button>
+        <button data-suggestion="Apa saja wisata menarik di Sumbawa?" class="chat-suggestion-btn text-[11px] bg-brand-50 text-brand-700 border border-brand-200 px-2.5 py-1 rounded-full hover:bg-brand-100 transition">🌋 Wisata Sumbawa</button>
+        <button data-suggestion="Berapa harga paket wisata Gili Trawangan?" class="chat-suggestion-btn text-[11px] bg-brand-50 text-brand-700 border border-brand-200 px-2.5 py-1 rounded-full hover:bg-brand-100 transition">💰 Harga Paket</button>
+        <button data-suggestion="Kapan waktu terbaik untuk mengunjungi NTB?" class="chat-suggestion-btn text-[11px] bg-brand-50 text-brand-700 border border-brand-200 px-2.5 py-1 rounded-full hover:bg-brand-100 transition">📅 Waktu Terbaik</button>
+      </div>
+
+      <!-- Input Area -->
+      <div class="px-3 pb-3 pt-1 border-t border-slate-100 shrink-0 bg-white">
+        <form id="chat-form" class="flex items-center gap-2">
+          <input
+            id="chat-input"
+            type="text"
+            placeholder="Tanya tentang wisata NTB..."
+            autocomplete="off"
+            class="flex-1 px-3 py-2 text-sm bg-slate-100 rounded-xl border border-transparent focus:border-brand-400 focus:bg-white focus:outline-none transition placeholder:text-slate-400"
+          />
+          <button
+            type="submit"
+            id="chat-send-btn"
+            class="w-9 h-9 bg-brand-600 hover:bg-brand-700 text-white rounded-xl flex items-center justify-center transition shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <i class="fa-solid fa-paper-plane text-sm"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </body>
+</html>
