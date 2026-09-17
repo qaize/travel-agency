@@ -68,7 +68,7 @@ export const uploadMemory = multer({
 });
 
 /**
- * Middleware khusus gambar saja (untuk paket & hero upload).
+ * Middleware khusus gambar saja — single file (untuk hero upload).
  */
 export const uploadGambar = multer({
   storage: multer.memoryStorage(),
@@ -78,3 +78,20 @@ export const uploadGambar = multer({
     else cb(new Error("Hanya file gambar yang diizinkan"), false);
   },
 }).single("gambar");
+
+/**
+ * Middleware multiple gambar untuk paket wisata.
+ * Field name: "gambar" (multiple files, max 6, masing-masing max 5MB).
+ * Digunakan di POST dan PUT /api/paket.
+ */
+export const uploadGambarMultiple = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize : 5 * 1024 * 1024, // 5MB per file
+    files    : 6,                // maksimal 6 gambar per paket
+  },
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith("image/")) cb(null, true);
+    else cb(new Error("Hanya file gambar yang diizinkan"), false);
+  },
+}).array("gambar", 6);

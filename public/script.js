@@ -65,13 +65,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     grid.innerHTML = paketList.map((p) => {
-      const gambar = p.gambar || "https://placehold.co/600x400/0d9488/ffffff?text=LombokTrip";
-      const harga  = "Rp " + Number(p.harga).toLocaleString("id-ID");
-      const badge  = p.badge_text
-        ? `<div class="absolute top-4 left-4 ${p.badge_color || "bg-amber-500"} text-white text-xs font-bold px-3 py-1 rounded-full shadow">${p.badge_text}</div>`
+      // gambar selalu array dari API (normalizePaket di repository)
+      const gambarArr = Array.isArray(p.gambar) ? p.gambar : (p.gambar ? [p.gambar] : []);
+      const thumb     = gambarArr[0] || "https://placehold.co/600x400/0d9488/ffffff?text=LombokTrip";
+      const jumlahFoto = gambarArr.length;
+
+      const harga = "Rp " + Number(p.harga).toLocaleString("id-ID");
+      const badge = p.badge_text
+        ? `<div class="absolute top-4 left-4 ${p.badge_color || "bg-amber-500"} text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+             ${p.badge_text}
+           </div>`
         : "";
 
-      // Harga campaign: harga_coret = harga asli sebelum diskon
+      // Dot indicator untuk multiple images
+      const dots = jumlahFoto > 1
+        ? `<div class="absolute bottom-10 left-0 right-0 flex justify-center gap-1.5 pointer-events-none">
+             ${gambarArr.map((_, i) =>
+               `<span class="w-1.5 h-1.5 rounded-full transition-all ${i === 0 ? "bg-white scale-125" : "bg-white/50"}"></span>`
+             ).join("")}
+           </div>`
+        : "";
+
+      // Badge jumlah foto di pojok
+      const fotoBadge = jumlahFoto > 1
+        ? `<div class="absolute top-4 right-14 bg-black/60 backdrop-blur-sm text-white text-xs px-2 py-0.5 rounded-md flex items-center gap-1">
+             <i class="fa-solid fa-images text-[10px]"></i> ${jumlahFoto}
+           </div>`
+        : "";
+
+      // Data gambar untuk lightbox (JSON encoded)
+      const gambarData = encodeURIComponent(JSON.stringify(gambarArr));
+
+      // Harga HTML
       let hargaHtml = "";
       if (p.harga_coret && Number(p.harga_coret) > Number(p.harga)) {
         const hargaCoret = "Rp " + Number(p.harga_coret).toLocaleString("id-ID");
@@ -101,27 +126,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
       return `
         <div
-          class="dest-card group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-slate-100 flex flex-col"
+          class="dest-card group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl
+                 transition-all duration-300 border border-slate-100 flex flex-col"
           data-category="${p.wilayah} ${p.kategori}"
           data-nama="${p.nama.toLowerCase()}"
           data-lokasi="${p.lokasi.toLowerCase()}"
         >
-          <div class="relative h-64 overflow-hidden">
+          <!-- Thumbnail + Lightbox trigger -->
+          <div class="relative h-64 overflow-hidden cursor-zoom-in"
+            data-lightbox="${gambarData}"
+            data-paket-nama="${p.nama}">
             <img
-              src="${gambar}"
+              src="${thumb}"
               alt="${p.nama}"
               class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
               onerror="this.src='https://placehold.co/600x400/e2e8f0/94a3b8?text=No+Image'"
             />
             ${badge}
+            ${fotoBadge}
+            ${dots}
             <button data-wishlist
-              class="absolute top-4 right-4 w-9 h-9 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-slate-600 hover:text-red-500 transition">
+              class="absolute top-4 right-4 w-9 h-9 bg-white/80 backdrop-blur-md rounded-full
+                     flex items-center justify-center text-slate-600 hover:text-red-500 transition z-10"
+              onclick="event.stopPropagation()">
               <i class="fa-regular fa-heart text-base"></i>
             </button>
             <div class="absolute bottom-3 left-4 bg-black/60 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-md">
               <i class="fa-solid fa-clock mr-1 text-teal-400"></i> ${p.durasi}
             </div>
           </div>
+
+          <!-- Info paket -->
           <div class="p-6 flex-1 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-2">
@@ -137,7 +172,8 @@ document.addEventListener("DOMContentLoaded", () => {
               ${hargaHtml}
               <button
                 data-booking-destination="${p.nama}"
-                class="bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition">
+                class="bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white
+                       px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition">
                 Detail Paket
               </button>
             </div>
@@ -145,7 +181,20 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>`;
     }).join("");
 
-    // Re-attach event listeners setelah render
+    // Event listener: klik area gambar → buka lightbox
+    grid.querySelectorAll("[data-lightbox]").forEach((el) => {
+      el.addEventListener("click", () => {
+        try {
+          const images = JSON.parse(decodeURIComponent(el.dataset.lightbox));
+          const nama   = el.dataset.paketNama || "";
+          if (images.length > 0 && window.LombokLightbox) {
+            window.LombokLightbox.open(images, 0, nama);
+          }
+        } catch {}
+      });
+    });
+
+    // Re-attach event listeners booking
     grid.querySelectorAll("[data-booking-destination]").forEach((btn) => {
       btn.addEventListener("click", () => {
         modalTitle.innerText = btn.dataset.bookingDestination;
